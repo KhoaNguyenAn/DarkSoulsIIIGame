@@ -25,6 +25,7 @@ public class Location implements Printable {
 	 * @param map the map that contains this location
 	 * @param x x coordinate of this location within the map
 	 * @param y y coordinate of this location within the map
+	 *          location Bonfire= new location (GameMap map, int x, int y);
 	 */
 	public Location(GameMap map, int x, int y) {
 		this.map = map;
