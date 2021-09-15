@@ -1,4 +1,4 @@
-package game;
+package game.enemies;
 
 
 import edu.monash.fit2099.engine.Action;
@@ -7,17 +7,22 @@ import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.DoNothingAction;
 import edu.monash.fit2099.engine.GameMap;
+import edu.monash.fit2099.engine.IntrinsicWeapon;
+import game.AttackAction;
+import game.InstantDieBehaviour;
+import game.WanderBehaviour;
 import game.enums.Status;
 import game.interfaces.Behaviour;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * An undead minion.
  */
-public class Undead extends Actor {
+public class Undead extends Enemies {
 	// Will need to change this to a collection if Undeads gets additional Behaviours.
-	private ArrayList<Behaviour> behaviours = new ArrayList<>();
+//	private ArrayList<Behaviour> behaviours = new ArrayList<>();
 
 	/** 
 	 * Constructor.
@@ -25,8 +30,9 @@ public class Undead extends Actor {
 	 * @param name the name of this Undead
 	 */
 	public Undead(String name) {
-		super(name, 'u', 50);
-		behaviours.add(new WanderBehaviour());
+		super(name, 'u', 50, 50);
+		behaviours.add(new InstantDieBehaviour());
+//		behaviours.add(new WanderBehaviour());
 	}
 
 	/**
@@ -61,7 +67,13 @@ public class Undead extends Actor {
 			if (action != null)
 				return action;
 		}
+		// undead has 10% probability to die instantly every turn
+		
 		return new DoNothingAction();
+	}
+	@Override
+	protected IntrinsicWeapon getIntrinsicWeapon() {
+		return new IntrinsicWeapon(20, "punches");
 	}
 
 }
