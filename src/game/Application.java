@@ -52,7 +52,9 @@ public class Application {
 			world.addGameMap(gameMap);
 
 			Actor player = new Player("Unkindled (Player)", '@', 100);
+			player.addItemToInventory(new EstusFlask());
 			world.addPlayer(player, gameMap.at(38, 12));
+
 
 			// Place Yhorm the Giant/boss in the map
 			gameMap.at(6, 25).addActor(new LordOfCinder("Yhorm the Giant", 'Y', 500));

@@ -211,4 +211,17 @@ public abstract class Actor implements Capable, Printable, DesignOSoulsAddOn, Ma
 	public void removeCapability(Enum<?> capability) {
 		capabilities.removeCapability(capability);
 	}
+	
+
+	public int getMaxHitPoints() {
+		return this.maxHitPoints;
+	}
+
+	public int getHitPoints() {
+		return this.hitPoints;
+	}
+	
+	public String getName() {
+		return this.name;
+	}
 }
