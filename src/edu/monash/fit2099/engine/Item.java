@@ -30,6 +30,8 @@ public abstract class Item implements Printable, Capable, DesignOSoulsAddOn {
 		allowableActions = new Actions();
 	}
 
+
+
     /**
      * Inform a carried Item of the passage of time.
      * 
