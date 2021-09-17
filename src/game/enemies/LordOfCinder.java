@@ -2,19 +2,24 @@ package game.enemies;
 
 import edu.monash.fit2099.engine.*;
 import game.enums.Abilities;
+import game.enums.Status;
+import game.interfaces.Behaviour;
+import game.interfaces.Resettable;
 
 /**
  * The boss of Design o' Souls
  * FIXME: This boss is Boring. It does nothing. You need to implement features here.
  * TODO: Could it be an abstract class? If so, why and how?
  */
-public class LordOfCinder extends Enemies {
+public class LordOfCinder extends Enemies implements Resettable{
+	private Location location = null;
     /**
      * Constructor.
      */
     public LordOfCinder(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints, 5000 );
-        this.addCapability(Abilities.REVIVE); // Only for testing the dead message.
+        this.addCapability(Abilities.BOSS); // Used for display dead message.
+        registerInstance();
     }
 
     /**
@@ -26,6 +31,14 @@ public class LordOfCinder extends Enemies {
      */
     @Override
     public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
+    	if (location == null)
+			location = map.locationOf(this);
+    	if(this.hasCapability(Status.SOFTRESET)) {
+			map.moveActor(this, location);
+			this.removeCapability(Status.SOFTRESET);
+			this.heal(maxHitPoints);
+			return new DoNothingAction();
+		}
         if(!this.isConscious()) {
         	System.out.println("                                                                                                                                                                                                                                                                                                                                                                                                            \n"
         			+ "                                                                                                                                                                                                                                                                                                                                                                                                            \n"
@@ -48,7 +61,26 @@ public class LordOfCinder extends Enemies {
         			+ "                                                                                                                                                                                                                                                                                                                                                                                                            \n"
         			+ "                                                                                                                                                                                                                                                                                                                                                                                                            \n"
         			+ "");
+        map.removeActor(this);
+        return new DoNothingAction();
         }
+        for(Behaviour Behaviour : behaviours) {
+			Action action = Behaviour.getAction(this, map);
+			if (action != null)
+				return action;
+		}
     	return new DoNothingAction();
     }
+
+	@Override
+	public void resetInstance() {
+		// TODO Auto-generated method stub
+		this.addCapability(Status.SOFTRESET);
+	}
+
+	@Override
+	public boolean isExist() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

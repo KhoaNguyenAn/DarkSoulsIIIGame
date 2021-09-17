@@ -48,7 +48,10 @@ public class ResetManager {
      * FIXME: it does nothing, you need to implement it :)
      */
     public void run(){
-
+    	for(Resettable obj : resettableList) {
+    		obj.resetInstance();
+    	}
+    	cleanUp();
     }
 
     /**
@@ -57,7 +60,7 @@ public class ResetManager {
      * @param resettable the interface instance
      */
     public void appendResetInstance(Resettable resettable){
-
+    	resettableList.add(resettable);
     }
 
     /**
@@ -65,6 +68,10 @@ public class ResetManager {
      * FIXME: it does nothing, you need to implement it :)
      */
     private void cleanUp(){
-
+    	for(int i = 0; i < resettableList.size(); i++) {
+    		if(!resettableList.get(i).isExist()) {
+    			resettableList.remove(i);
+    		}
+    	}
     }
 }

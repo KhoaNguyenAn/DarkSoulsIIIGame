@@ -5,7 +5,8 @@ package game.enums;
  */
 public enum Abilities {
     REST,
-    FALL,
-    ENTER,
-    REVIVE
+    FALL,   // To fall from valley
+    ENTER,  // To enter the floor
+    REVIVE, // To revive skeleton or player 
+    BOSS 	// To display messages after boss is defeated could be used for weak to storm ruler
 }

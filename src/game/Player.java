@@ -4,9 +4,11 @@ import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Display;
+import edu.monash.fit2099.engine.DoNothingAction;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.IntrinsicWeapon;
 import edu.monash.fit2099.engine.Menu;
+import edu.monash.fit2099.engine.Location;
 import game.enums.Abilities;
 import game.enums.Status;
 import game.interfaces.Behaviour;
@@ -35,10 +37,12 @@ public class Player extends Actor implements Soul, Resettable {
 		this.addCapability(Abilities.ENTER);
 		this.addCapability(Abilities.REVIVE); //player will not be removed from map after dead.
 		this.addItemToInventory(new Gun());
+		registerInstance();
 	}
 
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
+	
 		if (!this.isConscious()) {
 			System.out.println("                                                                                                                               \n"
 					+ "                                                                                                                       dddddddd\n"
@@ -59,8 +63,19 @@ public class Player extends Actor implements Soul, Resettable {
 					+ "    Y:::::::::::Y  oo:::::::::::oo   uu::::::::uu:::u     D::::::::::::DDD     i::::::i  ee:::::::::::::e    d:::::::::ddd::::d\n"
 					+ "    YYYYYYYYYYYYY    ooooooooooo       uuuuuuuu  uuuu     DDDDDDDDDDDDD        iiiiiiii    eeeeeeeeeeeeee     ddddddddd   ddddd\n"
 					+ "                                                                                                                               ");
-			//Should call soft rest
+		// Call soft rest
+		ResetManager manager = ResetManager.getInstance();
+		manager.run();
+		// Soft reset the player
+		// TODO: move to bonfire
+		if(this.hasCapability(Status.SOFTRESET)) {
+			this.heal(Integer.MAX_VALUE);
+			map.moveActor(this, map.at(38, 12));
+			this.removeCapability(Status.SOFTRESET);
 		}
+		return new DoNothingAction();
+		}
+		
 		// Handle multi-turn Actions
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
@@ -90,13 +105,14 @@ public class Player extends Actor implements Soul, Resettable {
 	@Override
 	public void resetInstance() {
 		// TODO Auto-generated method stub
+		this.addCapability(Status.SOFTRESET);
 		
 	}
 
 	@Override
 	public boolean isExist() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 	
 	@Override

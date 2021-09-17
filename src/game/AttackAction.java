@@ -62,7 +62,7 @@ public class AttackAction extends Action {
 			// remove actor
 			//TODO: In A1 scenario, you must not remove a Player from the game yet. What to do, then?
 			//We can set a revive abilities for skeleton and player, so that they will not be removed
-			if(!target.hasCapability(Abilities.REVIVE)) 
+			if(!(target.hasCapability(Abilities.REVIVE) || (target.hasCapability(Abilities.BOSS)))) 
 				map.removeActor(target);
 			result += System.lineSeparator() + target + " is killed.";
 

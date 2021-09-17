@@ -3,7 +3,7 @@ import edu.monash.fit2099.engine.*;
 public class Gun extends WeaponItem{
 
 	public Gun() {
-		super("Dz's Gun", '?', 80, "Shoot", 100);
+		super("Dz's Gun", '?', 100, "Shoot", 100);
 		// TODO Auto-generated constructor stub
 	}
 	@Override

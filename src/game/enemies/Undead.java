@@ -11,9 +11,12 @@ import edu.monash.fit2099.engine.IntrinsicWeapon;
 import game.AttackAction;
 import game.AttackBehaviour;
 import game.FollowBehaviour;
+import game.InstantDieBehaviour;
 import game.WanderBehaviour;
+import game.enums.Abilities;
 import game.enums.Status;
 import game.interfaces.Behaviour;
+import game.interfaces.Resettable;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -21,7 +24,7 @@ import java.util.Random;
 /**
  * An undead minion.
  */
-public class Undead extends Enemies {
+public class Undead extends Enemies implements Resettable{
 	// Will need to change this to a collection if Undeads gets additional Behaviours.
 	/**
 	 * A random generator
@@ -34,10 +37,10 @@ public class Undead extends Enemies {
 	 */
 	public Undead() {
 		super("Undead", 'u', 50, 50);
+		behaviours.add(new InstantDieBehaviour());
 		behaviours.add(new WanderBehaviour());
+		registerInstance();
 	}
-
-
 	/**
 	 * At the moment, we only make it can be attacked by enemy that has HOSTILE capability
 	 * You can do something else with this method.
@@ -56,7 +59,6 @@ public class Undead extends Enemies {
 //		}
 //		return actions;
 //	}
-
 	/**
 	 * Figure out what to do next.
 	 * FIXME: An Undead wanders around at random and it cannot attack anyone. Also, figure out how to spawn this creature.
@@ -65,18 +67,18 @@ public class Undead extends Enemies {
 	 */
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
-		// loop through all behaviours
-		if(random.nextInt(100)<10) {
+		// Softreset - remove the undead from map
+		if(this.hasCapability(Status.SOFTRESET)) {
 			map.removeActor(this);
 			return new DoNothingAction();
 		}
+		// loop through all behaviours
 		for(Behaviour Behaviour : behaviours) {
 			Action action = Behaviour.getAction(this, map);
 			if (action != null)
 				return action;
 		}
 		// undead has 10% probability to die instantly every turn
-		
 		return new DoNothingAction();
 	}
 	/**
@@ -86,6 +88,18 @@ public class Undead extends Enemies {
 	@Override
 	protected IntrinsicWeapon getIntrinsicWeapon() {
 		return new IntrinsicWeapon(20, "punches");
+	}
+
+	@Override
+	public void resetInstance() {
+		// TODO Auto-generated method stub
+		this.addCapability(Status.SOFTRESET);
+	}
+
+	@Override
+	public boolean isExist() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
