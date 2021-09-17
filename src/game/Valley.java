@@ -3,6 +3,7 @@ package game;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Ground;
 import edu.monash.fit2099.engine.Location;
+import game.enums.Abilities;
 
 /**
  * The gorge or endless gap that is dangerous for the Player.
@@ -25,7 +26,7 @@ public class Valley extends Ground {
 	 */
 	@Override
 	public boolean canActorEnter(Actor actor){
-		if(actor.getDisplayChar() == '@')
+		if(actor.hasCapability(Abilities.FALL))
 			return true;
 		else
 			return false;

@@ -12,22 +12,38 @@ import game.enemies.Skeleton;
 import game.enemies.Undead;
 
 /**
- * The gorge or endless gap that is dangerous for the Player.
+ * A cemetery can spawn the undeads
+ * @author Dongzheng Wu
  */
 public class Cemetery extends Ground {
+	/**
+	 * A random generateor
+	 */
 	private final Random random = new Random();
+	/**
+	 * Constructor with 'c' character represent the cemetery
+	 */
 	public Cemetery() {
 		super('c');
 	}
-
+	/**
+	 * I assume that the actor cannot enter the cemetery, otherwise the undead will not be spawn.
+	 */
 	@Override
 	public boolean canActorEnter(Actor actor){
 		return false;
 	}
-	
+	/**
+	 * Has 25% chance to spawn undead in each turn
+	 */
 	public void tick(Location location) {
-		if(random.nextInt(4)==1) {
-			location.addActor(new Undead("Undead"));
+		// Check if there is an actor on the cemetery
+		if(location.getActor()==null) {
+			if(random.nextInt(100) < 25) {
+				Undead undead = new Undead();
+				location.addActor(undead);
+			}
 		}
+		
 	}
 }

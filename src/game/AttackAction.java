@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Item;
 import edu.monash.fit2099.engine.Weapon;
+import game.enums.Abilities;
 
 /**
  * Special Action for attacking other Actors.
@@ -60,8 +61,11 @@ public class AttackAction extends Action {
 				drop.execute(target, map);
 			// remove actor
 			//TODO: In A1 scenario, you must not remove a Player from the game yet. What to do, then?
-			map.removeActor(target);
+			//We can set a revive abilities for skeleton and player, so that they will not be removed
+			if(!target.hasCapability(Abilities.REVIVE)) 
+				map.removeActor(target);
 			result += System.lineSeparator() + target + " is killed.";
+
 		}
 
 		return result;

@@ -32,8 +32,8 @@ public class AttackBehaviour implements Behaviour{
 		for (Exit exit : here.getExits()) {
 			Location destination = exit.getDestination();
 			int newDistance = distance(destination, there);
-			if (newDistance < currentDistance) {
-				return new AttackAction(target, exit.getName());
+			if (currentDistance < 2) {
+				return new AttackAction(target, destination.toString());
 			}
 		}
 
