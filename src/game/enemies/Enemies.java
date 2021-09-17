@@ -7,7 +7,9 @@ import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.IntrinsicWeapon;
 import game.AttackAction;
 import game.AttackBehaviour;
+import game.CritShoot;
 import game.FollowBehaviour;
+import game.RandomSkillBehaviour;
 import game.ReviveBehaviour;
 import game.WanderBehaviour;
 import game.enums.Abilities;
@@ -57,8 +59,13 @@ public abstract class Enemies extends Actor{
 		// it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
 		if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
 			actions.add(new AttackAction(this,direction));
+			if(!(otherActor.getWeapon() instanceof IntrinsicWeapon)) {
+				actions.add(otherActor.getWeapon().getActiveSkill(this, direction));
+			}
 			behaviours.add(0, new FollowBehaviour(otherActor));
 			behaviours.add(0, new AttackBehaviour(otherActor));
+			if(!(this.getWeapon() instanceof IntrinsicWeapon))
+				behaviours.add(0, new RandomSkillBehaviour(otherActor));
 		}
 		
 		return actions;
@@ -70,9 +77,9 @@ public abstract class Enemies extends Actor{
 	 */
 	@Override
 	public String toString() {
-		String weapon = "(no weapon)";
-		if(this.getWeapon() instanceof IntrinsicWeapon == false)
-			weapon = "(holding" + weapon.toString()+")";
-		return name + "(" + hitPoints + "/" + maxHitPoints + ")" + weapon;
+		String message = "(no weapon)";
+		if(!(this.getWeapon() instanceof IntrinsicWeapon))
+			message = "(holding " + this.getWeapon().toString()+")";
+		return name + "(" + hitPoints + "/" + maxHitPoints + ")" + message;
 	}
 }

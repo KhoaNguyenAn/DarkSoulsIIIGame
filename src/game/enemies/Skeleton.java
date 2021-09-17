@@ -12,6 +12,8 @@ import edu.monash.fit2099.engine.GameMap;
 import game.AttackAction;
 import game.AttackBehaviour;
 import game.FollowBehaviour;
+import game.Gun;
+import game.MagicWand;
 import game.ReviveBehaviour;
 import game.WanderBehaviour;
 import game.enums.Status;
@@ -31,6 +33,7 @@ public class Skeleton extends Enemies{
 		super("Skeleton", 's', 100, 250);
 		this.addCapability(Abilities.REVIVE);
 		behaviours.add(new WanderBehaviour());
+		randomWeapon();
 	}
 
 	@Override
@@ -42,5 +45,15 @@ public class Skeleton extends Enemies{
 				return action;
 		}
 		return new DoNothingAction();
+	}
+	/**
+	 * A method that allow skeleton to use random weapons
+	 * TODO: Need modified to broad sword and giant axe later
+	 */
+	private void randomWeapon() {
+		if(random.nextInt(100)<50)
+			this.addItemToInventory(new Gun());
+		else
+			this.addItemToInventory(new MagicWand());
 	}
 }
