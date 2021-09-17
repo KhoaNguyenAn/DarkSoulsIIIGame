@@ -65,10 +65,11 @@ public class Application {
 			// FIXME: the Undead should be generated from the Cemetery
 			// FIXED: the Undead will be generated from the Cemetery
 //			gameMap.at(32, 7).addActor(new Undead("Undead"));
-			Skeleton skeleton = new Skeleton("Skeleton");
-			skeleton.behaviours.add(new FollowBehaviour(player));
-//			skeleton.behaviours.add(new WanderBehaviour());
-			gameMap.at(32, 7).addActor(skeleton);
+			gameMap.at(32, 7).addActor(new Skeleton());
+			gameMap.at(2, 15).addActor(new Skeleton());
+			gameMap.at(10, 10).addActor(new Skeleton());
+			gameMap.at(20, 20).addActor(new Skeleton());
+			gameMap.at(52, 23).addActor(new Skeleton());
 			world.run();
 
 	}

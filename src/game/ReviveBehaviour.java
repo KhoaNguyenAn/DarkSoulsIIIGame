@@ -4,6 +4,7 @@ import java.util.Random;
 
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actor;
+import edu.monash.fit2099.engine.DoNothingAction;
 import edu.monash.fit2099.engine.GameMap;
 import game.enums.Abilities;
 import game.interfaces.Behaviour;
@@ -25,20 +26,18 @@ public class ReviveBehaviour extends Action implements Behaviour{
 	@Override
 	public Action getAction(Actor actor, GameMap map) {
 		if(!actor.isConscious()) {
-			if(random.nextInt(100)<0) {
+			if(random.nextInt(100)<50) {
 				actor.heal(Integer.MAX_VALUE);
 				actor.removeCapability(Abilities.REVIVE);
-//				this.execute(actor, map);
 				return this;
 			}
 			else {
 				map.removeActor(actor);
-				return null;
+				return this;
 			}
 		}
 		else
 			return null;
-
 	}
 	/**
 	 * Execute the menu description
@@ -50,9 +49,9 @@ public class ReviveBehaviour extends Action implements Behaviour{
 	
 	@Override
 	public String menuDescription(Actor actor) {
-//		if(actor.isConscious())
+		if(actor.isConscious())
 			return actor + " is revived !";
-//		return "";
+		return actor + "is die peacefully ~";
 	}
 
 }

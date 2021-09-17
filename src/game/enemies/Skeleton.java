@@ -41,24 +41,6 @@ public class Skeleton extends Enemies{
 			if (action != null)
 				return action;
 		}
-		
-		if(!this.isConscious())
-			map.removeActor(this);
-		
 		return new DoNothingAction();
 	}
-
-
-	
-//	@Override
-//	public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) {
-//		
-//		Actions actions = new Actions();
-//		// it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
-//		if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
-//			actions.add(new AttackAction(this,direction));
-//		}
-//		return actions;
-//	}
-	
 }
