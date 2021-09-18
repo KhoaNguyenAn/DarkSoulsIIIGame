@@ -60,16 +60,15 @@ public class Application {
 
 			// Place Yhorm the Giant/boss in the map
 			gameMap.at(6, 25).addActor(new LordOfCinder("Yhorm the Giant", 'Y', 500));
-
-			// Place a Hollow in the the map
-			// FIXME: the Undead should be generated from the Cemetery
+			
 			// FIXED: the Undead will be generated from the Cemetery
+			
+			// Place several Skeletons in the map
 			gameMap.at(0, 0).addActor(new Skeleton());
 			gameMap.at(2, 15).addActor(new Skeleton());
 			gameMap.at(10, 10).addActor(new Skeleton());
 			gameMap.at(20, 20).addActor(new Skeleton());
 			gameMap.at(52, 23).addActor(new Skeleton());
 			world.run();
-
 	}
 }

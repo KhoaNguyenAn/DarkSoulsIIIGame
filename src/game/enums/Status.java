@@ -6,5 +6,6 @@ package game.enums;
  */
 public enum Status {
     HOSTILE_TO_ENEMY, // use this capability to be hostile towards something (e.g., to be attacked by enemy)
-    SOFTRESET
+    SOFTRESET,
+    ACTIVE // use this status to display active message for boss
 }

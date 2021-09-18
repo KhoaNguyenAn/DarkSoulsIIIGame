@@ -14,7 +14,7 @@ public class CritShoot extends WeaponAction{
 	@Override
 	public String execute(Actor actor, GameMap map) {
 
-		int damage = this.weapon.damage()*20;
+		int damage = this.weapon.damage()*2;
 		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
 		target.hurt(damage);
 		if (!target.isConscious()) {

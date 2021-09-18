@@ -4,7 +4,6 @@ public class Gun extends WeaponItem{
 
 	public Gun() {
 		super("Dz's Gun", '?', 100, "Shoot", 100);
-		// TODO Auto-generated constructor stub
 	}
 	@Override
 	public WeaponAction getActiveSkill(Actor target, String direction){

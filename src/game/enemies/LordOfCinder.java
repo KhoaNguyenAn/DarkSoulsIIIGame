@@ -1,25 +1,35 @@
 package game.enemies;
 
 import edu.monash.fit2099.engine.*;
+import game.AttackAction;
+import game.AttackBehaviour;
+import game.FollowBehaviour;
+import game.HeavySword;
+import game.UniqueBehaviour;
 import game.enums.Abilities;
 import game.enums.Status;
 import game.interfaces.Behaviour;
 import game.interfaces.Resettable;
+import game.PortableItem;
 
 /**
  * The boss of Design o' Souls
- * FIXME: This boss is Boring. It does nothing. You need to implement features here.
- * TODO: Could it be an abstract class? If so, why and how?
+ * FIXED: Features are implemented.
+ * TODO: Could it be an abstract class? If so, why and how? (Answered in design rationale)
+ * LordOfCinder represents a lord of cinder (boss)
  */
 public class LordOfCinder extends Enemies implements Resettable{
+	/**
+	 * Location is used to store the initial position of load of cinder
+	 */
 	private Location location = null;
     /**
-     * Constructor.
+     * Constructor, it is created in application, Worth 5000 souls.
      */
     public LordOfCinder(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints, 5000 );
-        this.addCapability(Abilities.BOSS); // Used for display dead message.
-        registerInstance();
+        this.addCapability(Abilities.BOSS);		// Used for some boss feature.
+        this.addItemToInventory(new HeavySword());		//TODO: need Change to Yhorm’s Great Machete 
     }
 
     /**
@@ -27,18 +37,24 @@ public class LordOfCinder extends Enemies implements Resettable{
      * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
      * @param map        the map containing the Actor
      * @param display    the I/O object to which messages may be written
-     * @return DoNothingAction
+     * @return Action	 the action this enemy going to do
      */
     @Override
     public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
+    	System.out.println(behaviours.toString());
+    	// Add location of Lord of cinder
     	if (location == null)
 			location = map.locationOf(this);
+    	
+    	// If soft reset is triggered, move this enemy to original position, heal it, remove status.
     	if(this.hasCapability(Status.SOFTRESET)) {
 			map.moveActor(this, location);
 			this.removeCapability(Status.SOFTRESET);
 			this.heal(maxHitPoints);
 			return new DoNothingAction();
 		}
+    	
+    	// Display message and drop cinder of a lord item after this enemy died.
         if(!this.isConscious()) {
         	System.out.println("                                                                                                                                                                                                                                                                                                                                                                                                            \n"
         			+ "                                                                                                                                                                                                                                                                                                                                                                                                            \n"
@@ -61,6 +77,7 @@ public class LordOfCinder extends Enemies implements Resettable{
         			+ "                                                                                                                                                                                                                                                                                                                                                                                                            \n"
         			+ "                                                                                                                                                                                                                                                                                                                                                                                                            \n"
         			+ "");
+        map.locationOf(this).addItem(new PortableItem("Cinders of a Lord", '='));
         map.removeActor(this);
         return new DoNothingAction();
         }
@@ -71,16 +88,32 @@ public class LordOfCinder extends Enemies implements Resettable{
 		}
     	return new DoNothingAction();
     }
+    
+    @Override
+	public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) {
+		Actions actions = new Actions();
+		// it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
+		if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+			actions.add(new AttackAction(this,direction));
+			if(!(otherActor.getWeapon() instanceof IntrinsicWeapon)) {
+				actions.add(otherActor.getWeapon().getActiveSkill(this, direction));
+			}
+			behaviours.add(0, new FollowBehaviour(otherActor));
+			behaviours.add(0, new AttackBehaviour(otherActor));
+			behaviours.add(0, new UniqueBehaviour(otherActor, hitPoints, maxHitPoints));
+		}
+
+
+		return actions;
+	}
 
 	@Override
 	public void resetInstance() {
-		// TODO Auto-generated method stub
 		this.addCapability(Status.SOFTRESET);
 	}
 
 	@Override
 	public boolean isExist() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 }

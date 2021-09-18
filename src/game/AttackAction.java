@@ -52,7 +52,7 @@ public class AttackAction extends Action {
 		int damage = weapon.damage();
 		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
 		target.hurt(damage);
-		if (!target.isConscious()) {
+		if (!target.isConscious() && !(target.hasCapability(Abilities.BOSS))) {
 			Actions dropActions = new Actions();
 			// drop all items
 			for (Item item : target.getInventory())
@@ -62,10 +62,9 @@ public class AttackAction extends Action {
 			// remove actor
 			//TODO: In A1 scenario, you must not remove a Player from the game yet. What to do, then?
 			//We can set a revive abilities for skeleton and player, so that they will not be removed
-			if(!(target.hasCapability(Abilities.REVIVE) || (target.hasCapability(Abilities.BOSS)))) 
+			if(!(target.hasCapability(Abilities.REVIVE))) 
 				map.removeActor(target);
 			result += System.lineSeparator() + target + " is killed.";
-
 		}
 
 		return result;

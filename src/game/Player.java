@@ -19,6 +19,8 @@ import game.interfaces.Soul;
  * Class representing the Player.
  */
 public class Player extends Actor implements Soul, Resettable {
+	
+	private int souls = 0;
 
 	private final Menu menu = new Menu();
 
@@ -36,13 +38,13 @@ public class Player extends Actor implements Soul, Resettable {
 		this.addCapability(Abilities.FALL);
 		this.addCapability(Abilities.ENTER);
 		this.addCapability(Abilities.REVIVE); //player will not be removed from map after dead.
-		this.addItemToInventory(new Gun());
+		this.addItemToInventory(new Gun());	  //TODO: Change to broad sword
 		registerInstance();
 	}
 
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
-	
+		message();
 		if (!this.isConscious()) {
 			System.out.println("                                                                                                                               \n"
 					+ "                                                                                                                       dddddddd\n"
@@ -63,13 +65,18 @@ public class Player extends Actor implements Soul, Resettable {
 					+ "    Y:::::::::::Y  oo:::::::::::oo   uu::::::::uu:::u     D::::::::::::DDD     i::::::i  ee:::::::::::::e    d:::::::::ddd::::d\n"
 					+ "    YYYYYYYYYYYYY    ooooooooooo       uuuuuuuu  uuuu     DDDDDDDDDDDDD        iiiiiiii    eeeeeeeeeeeeee     ddddddddd   ddddd\n"
 					+ "                                                                                                                               ");
-		// Call soft rest
-		ResetManager manager = ResetManager.getInstance();
+		
+		ResetManager manager = ResetManager.getInstance(); // Call soft reset
 		manager.run();
+		placeTokenOfSoul(map, lastAction); // Place the token of soul
+
 		// Soft reset the player
 		// TODO: move to bonfire
 		if(this.hasCapability(Status.SOFTRESET)) {
 			this.heal(Integer.MAX_VALUE);
+			// Heal the player twice because the player may hurt before falling valley, in this case
+			// one heal cannot get to the maximum.
+			this.heal(maxHitPoints);
 			map.moveActor(this, map.at(38, 12));
 			this.removeCapability(Status.SOFTRESET);
 		}
@@ -89,17 +96,11 @@ public class Player extends Actor implements Soul, Resettable {
 		//TODO: transfer Player's souls to another Soul's instance.
 	}
 	
-	@Override
-	public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) {
-		Actions actions = new Actions();
-		// it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
-		return actions;
-	}
-	
-//	//TODO: This method only used for testing, should be removed after finished.
 //	@Override
-//	protected IntrinsicWeapon getIntrinsicWeapon() {
-//		return new IntrinsicWeapon(80, "shoot");
+//	public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) {
+//		Actions actions = new Actions();
+//		// it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
+//		return actions;
 //	}
 
 	@Override
@@ -115,11 +116,57 @@ public class Player extends Actor implements Soul, Resettable {
 		return true;
 	}
 	
+	public void message() {
+		String message;
+		String weapon = ", (no weapon)";
+		if(!(this.getWeapon() instanceof IntrinsicWeapon))
+			weapon = ", (holding " + this.getWeapon().toString()+")";
+		message = name + "(" + hitPoints + "/" + maxHitPoints + ")" + weapon + ", " + souls +" souls";
+		System.out.println(message);
+	}
+	
 	@Override
 	public String toString() {
-		String message = "(no weapon)";
-		if(!(this.getWeapon() instanceof IntrinsicWeapon))
-			message = "(holding " + this.getWeapon().toString()+")";
-		return name + "(" + hitPoints + "/" + maxHitPoints + ")" + message;
+//		String message = "(no weapon)";
+//		if(!(this.getWeapon() instanceof IntrinsicWeapon))
+//			message = "(holding " + this.getWeapon().toString()+")";
+//		return name + "(" + hitPoints + "/" + maxHitPoints + ")" + message + ", " + souls +" souls";
+		return name;
+	}
+
+	public void placeTokenOfSoul(GameMap map, Action lastAction) {
+		TokenOfSoul token = new TokenOfSoul();
+		this.asSoul().transferSouls(token);
+		if(map.locationOf(this).getGround().getDisplayChar()!='+')
+			map.locationOf(this).addItem(token);
+		else {
+			int x = map.locationOf(this).x();
+			int y = map.locationOf(this).y();
+			if(lastAction.hotkey()=="8")
+				y++;
+			else if(lastAction.hotkey()=="2")
+				y--;
+			else if(lastAction.hotkey()=="4")
+				x++;
+			else if(lastAction.hotkey()=="6")
+				x--;
+			else if(lastAction.hotkey()=="7") {
+				x++;
+				y++;
+			}
+			else if(lastAction.hotkey()=="3") {
+				x--;
+				y--;
+			}
+			else if(lastAction.hotkey()=="9") {
+				x--;
+				y++;
+			}
+			else if(lastAction.hotkey()=="1") {
+				x++;
+				y--;
+			}
+			map.at(x, y).addItem(token);
+		}
 	}
 }
