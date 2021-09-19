@@ -51,6 +51,10 @@ public class LordOfCinder extends Enemies implements Resettable{
 			map.moveActor(this, location);
 			this.removeCapability(Status.SOFTRESET);
 			this.heal(maxHitPoints);
+			for (int i = 0; i < behaviours.size(); i++) {
+	        	if(behaviours.get(i) instanceof FollowBehaviour)
+	        		behaviours.remove(i);
+	        }
 			return new DoNothingAction();
 		}
     	
@@ -79,6 +83,7 @@ public class LordOfCinder extends Enemies implements Resettable{
         			+ "");
         map.locationOf(this).addItem(new PortableItem("Cinders of a Lord", '='));
         map.removeActor(this);
+        
         return new DoNothingAction();
         }
         for(Behaviour Behaviour : behaviours) {

@@ -60,6 +60,10 @@ public class Skeleton extends Enemies implements Resettable{
 			map.moveActor(this, location);
 			this.removeCapability(Status.SOFTRESET);
 			this.heal(maxHitPoints);
+			for (int i = 0; i < behaviours.size(); i++) {
+	        	if(behaviours.get(i) instanceof FollowBehaviour)
+	        		behaviours.remove(i);
+	        }
 			return new DoNothingAction();
 		}
 		
