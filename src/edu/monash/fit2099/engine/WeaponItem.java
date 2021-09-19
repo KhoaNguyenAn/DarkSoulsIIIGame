@@ -18,7 +18,7 @@ public abstract class WeaponItem extends Item implements Weapon{
 	 * @param hitRate the probability/chance to hit the target.
 	 */
 	public WeaponItem(String name, char displayChar, int damage, String verb, int hitRate) {
-		super(name, displayChar, true);
+		super(name, displayChar , true);
 		this.damage = damage;
 		this.verb = verb;
 		this.hitRate = hitRate;
