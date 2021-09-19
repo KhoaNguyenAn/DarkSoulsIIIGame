@@ -3,9 +3,10 @@ package game;
 import edu.monash.fit2099.engine.GameMap;
 import game.Weapon.BroadSword;
 import game.Weapon.GiantAxe;
+import game.interfaces.Purchasable;
 import game.interfaces.Soul;
 
-public class Trade implements Soul {
+public class Trade implements Soul,Purchasable {
     public Trade() {
 
     }
@@ -34,7 +35,8 @@ public class Trade implements Soul {
         return Soul.super.subtractSouls(souls);
     }
 
-    public void buyBroadSword(Player player, GameMap gameMap){
+    public void buyItem(Player player, GameMap gameMap){
+
         if(subtractSouls(500)==true){
             BroadSword broadSword=new BroadSword("BroadSword",'q',30,"slash",80,"Critical Strike");
              SwapWeaponAction swapWeaponAction=new SwapWeaponAction(broadSword);

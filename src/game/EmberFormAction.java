@@ -4,8 +4,8 @@ import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 
-public class ChargeAction  extends Action {
-    protected int chargeCounter=0;
+public class EmberFormAction extends Action {
+
     /**
      * Perform the Action.
      *
@@ -15,13 +15,7 @@ public class ChargeAction  extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        if (chargeCounter==3){
-
-            return "Charge 3/3 Finish!";
-        }else {
-            chargeCounter++;
-            return "StormRuler Charged"+chargeCounter+"/3";
-        }
+        return null;
     }
 
     /**
@@ -34,6 +28,4 @@ public class ChargeAction  extends Action {
     public String menuDescription(Actor actor) {
         return null;
     }
-
-
 }

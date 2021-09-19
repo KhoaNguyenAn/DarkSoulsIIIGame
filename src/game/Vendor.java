@@ -1,15 +1,10 @@
 package game;
 
 import edu.monash.fit2099.engine.*;
-
-import java.util.List;
-
-import static game.enums.Abilities.BUY_ITEMS;
+import game.enums.Abilities;
 
 public class Vendor extends Actor {
 
-
-    private List <Action> vendorActions;
 
     /**
      * Constructor.
@@ -19,8 +14,7 @@ public class Vendor extends Actor {
      * @param hitPoints   the Actor's starting hit points
      */
     public Vendor(String name, char displayChar, int hitPoints) {
-        super(name, displayChar, hitPoints);
-//          vendorActions.add()
+        super("Vendor", 'F', 0);
     }
 
     /**
@@ -47,15 +41,18 @@ public class Vendor extends Actor {
      */
     @Override
     public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) {
-
         Actions actions = new Actions();
-        // When Player is next to the Vendor
-        if(otherActor.hasCapability(BUY_ITEMS)) {
-            actions.add(new PurchaseAction());
+        if (otherActor.hasCapability(Abilities.BUY_ITEMS)) {
+
+
+            // Add follow and attack behaviour to enemies
+            actions.add(new BuyBroadswordAction());
+            actions.add(new BuyGiantAxe());
+
+
+
+
         }
         return actions;
-
-
     }
-
 }

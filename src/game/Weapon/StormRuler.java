@@ -12,34 +12,25 @@ public class StormRuler extends Sword {
      * @param hitRate     the probability/chance to hit the target.
      */
     public StormRuler(String name, char displayChar, int damage, String verb, int hitRate,String swordPassiveSkill) {
-        super(name, displayChar, damage, verb, hitRate, swordPassiveSkill);
-        this.name = name;
-        this.displayChar = displayChar;
-        this.damage = damage;
-        this.verb = verb;
-        this.hitRate = hitRate;
-        //this.swordPassiveSkill=swordPassiveSkill;
-    }
-
-    int chargeCounter=0;
-
-    public String Charge(){
-
-        if (chargeCounter==3){
-            return "Charge 3/3 Finish!";
-        }else {
-            chargeCounter++;
-            return "StormRuler Charged"+chargeCounter+"/3";
-        }
-    }
-
-    public void windSLash(){
-        // Stun Boss
-
-
-        //Double Damage
-        //Get Damage--> Multiply-->return
+        super("StormRuler", '7', 50, "blow", 60, "critical strike, Dullness");
 
     }
 
+    /**
+     * Accessor for damage done by this weapon.
+     *
+     * @return the damage
+     */
+    @Override
+    public int damage() {
+        int newDamage= criticalStrike();
+        int finalDamage= Dullness(newDamage);
+        return super.damage();
+    }
+
+    public int Dullness(int newDamage){
+
+        //if enemy is not Yhorm's Giant
+        return newDamage/2 ;
+    }
 }
