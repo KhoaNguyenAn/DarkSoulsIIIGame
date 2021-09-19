@@ -45,26 +45,34 @@ public class ResetManager {
     /**
      * Reset the game by traversing through all the list
      * By doing this way, it will avoid using `instanceof` all over the place.
-     * FIXME: it does nothing, you need to implement it :)
+     * FIXED: not it will reset all the resettable instance and then clean them up if they are
+     * not exist anymore.
      */
     public void run(){
-
+    	for(Resettable obj : resettableList) {
+    		obj.resetInstance();
+    	}
+    	cleanUp();
     }
 
     /**
      * Add the Resettable instance to the list
-     * FIXME: it does nothing, you need to implement it :)
+     * FIXED: it will append all the resettable instance in the reset list
      * @param resettable the interface instance
      */
     public void appendResetInstance(Resettable resettable){
-
+    	resettableList.add(resettable);
     }
 
     /**
      * clean up instances (actor, item, or ground) that doesn't exist anymore in the map
-     * FIXME: it does nothing, you need to implement it :)
+     * FIXED: it will clean all not exist instances.
      */
     private void cleanUp(){
-
+    	for(int i = 0; i < resettableList.size(); i++) {
+    		if(!resettableList.get(i).isExist()) {
+    			resettableList.remove(i);
+    		}
+    	}
     }
 }
