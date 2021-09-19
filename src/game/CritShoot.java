@@ -1,8 +1,5 @@
 package game;
-import java.util.ArrayList;
-
 import edu.monash.fit2099.engine.*;
-import game.enums.Abilities;
 public class CritShoot extends WeaponAction{
 	protected Actor target;
 	public CritShoot(WeaponItem weaponItem, Actor target) {

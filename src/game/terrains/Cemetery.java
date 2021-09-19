@@ -1,18 +1,14 @@
-package game;
+package game.terrains;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Ground;
-import edu.monash.fit2099.engine.Item;
 import edu.monash.fit2099.engine.Location;
-import game.enemies.Skeleton;
 import game.enemies.Undead;
 
 /**
- * A cemetery can spawn the undeads
+ * Class representing cemetery
  * @author Dongzheng Wu
  */
 public class Cemetery extends Ground {
@@ -27,14 +23,15 @@ public class Cemetery extends Ground {
 		super('c');
 	}
 	/**
-	 * I assume that the actor cannot enter the cemetery, otherwise the undead will not be spawn.
+	 * Override canActorEnter method so that actors cannot enter
+	 * I assume the actor cannot enter the cemetery, otherwise the undead will not be spawn.
 	 */
 	@Override
 	public boolean canActorEnter(Actor actor){
 		return false;
 	}
 	/**
-	 * Has 25% chance to spawn undead in each turn
+	 * Method to spawn undead with 25% chance in each turn.
 	 */
 	public void tick(Location location) {
 		// Check if there is an actor on the cemetery
@@ -44,6 +41,5 @@ public class Cemetery extends Ground {
 				location.addActor(undead);
 			}
 		}
-		
 	}
 }

@@ -8,10 +8,8 @@ import edu.monash.fit2099.engine.DoNothingAction;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.IntrinsicWeapon;
 import edu.monash.fit2099.engine.Menu;
-import edu.monash.fit2099.engine.Location;
 import game.enums.Abilities;
 import game.enums.Status;
-import game.interfaces.Behaviour;
 import game.interfaces.Resettable;
 import game.interfaces.Soul;
 
@@ -19,8 +17,10 @@ import game.interfaces.Soul;
  * Class representing the Player.
  */
 public class Player extends Actor implements Soul, Resettable {
-	
-	private int souls = 0;
+	/**
+	 * The number of souls to reward after enemies was defeated
+	 */
+	private SoulsManager souls;
 
 	private final Menu menu = new Menu();
 
@@ -33,18 +33,20 @@ public class Player extends Actor implements Soul, Resettable {
 	 */
 	public Player(String name, char displayChar, int hitPoints) {
 		super(name, displayChar, hitPoints);
-		this.addCapability(Status.HOSTILE_TO_ENEMY);
-		this.addCapability(Abilities.REST);
-		this.addCapability(Abilities.FALL);
-		this.addCapability(Abilities.ENTER);
-		this.addCapability(Abilities.REVIVE); //player will not be removed from map after dead.
+		this.addCapability(Status.HOSTILE_TO_ENEMY);	// To distinguish between enemies and player
+		this.addCapability(Abilities.REST);		// Ability to rest on bonfire
+		this.addCapability(Abilities.FALL);		// Ability to fall from valley
+		this.addCapability(Abilities.ENTER);	// Ability to enter the floor
+		this.addCapability(Abilities.PLAYER); // Player will not be removed from map after dead.
 		this.addItemToInventory(new Gun());	  //TODO: Change to broad sword
-		registerInstance();
+		this.souls = new SoulsManager();	// Use SoulsManager to handle/store souls
+		registerInstance();		// Register to reset list
 	}
 
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
-		message();
+		message();		// Display the current status of player
+		// Check if player is conscious or not.
 		if (!this.isConscious()) {
 			System.out.println("                                                                                                                               \n"
 					+ "                                                                                                                       dddddddd\n"
@@ -66,7 +68,8 @@ public class Player extends Actor implements Soul, Resettable {
 					+ "    YYYYYYYYYYYYY    ooooooooooo       uuuuuuuu  uuuu     DDDDDDDDDDDDD        iiiiiiii    eeeeeeeeeeeeee     ddddddddd   ddddd\n"
 					+ "                                                                                                                               ");
 		
-		ResetManager manager = ResetManager.getInstance(); // Call soft reset
+		// Play dead, run soft reset
+		ResetManager manager = ResetManager.getInstance();
 		manager.run();
 		placeTokenOfSoul(map, lastAction); // Place the token of soul
 
@@ -90,53 +93,66 @@ public class Player extends Actor implements Soul, Resettable {
 		// return/print the console menu
 		return menu.showMenu(this, actions, display);
 	}
-
+	/**
+	 * Override the transferSouls so that the souls of player can be transferred to token of souls
+	 */
 	@Override
 	public void transferSouls(Soul soulObject) {
-		//TODO: transfer Player's souls to another Soul's instance.
+		soulObject.addSouls(souls.getSouls());
+		souls.clear();
 	}
-	
-//	@Override
-//	public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) {
-//		Actions actions = new Actions();
-//		// it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
-//		return actions;
-//	}
-
+	/**
+	 * Override the addSouls so that player can gain souls
+	 */
 	@Override
-	public void resetInstance() {
-		// TODO Auto-generated method stub
-		this.addCapability(Status.SOFTRESET);
-		
-	}
-
-	@Override
-	public boolean isExist() {
-		// TODO Auto-generated method stub
+	public boolean addSouls(int souls){
+		this.souls.add(souls);
 		return true;
 	}
-	
+	/**
+	 * Override subtractSouls so that it can deduce the player's souls (can be used in purchasing)
+	 */
+	@Override
+	public boolean subtractSouls(int souls){
+		boolean res = false;
+		res = this.souls.sub(souls);
+		return res;
+	}
+	/**
+	 * Add SOFTRESET status for soft reset.
+	 */
+	@Override
+	public void resetInstance() {
+		this.addCapability(Status.SOFTRESET);
+	}
+	/**
+	 * The player will not be removed after soft reset, so return true
+	 */
+	@Override
+	public boolean isExist() {
+		return true;
+	}
+	/**
+	 * Method to display current status of player
+	 */
 	public void message() {
 		String message;
 		String weapon = ", (no weapon)";
 		if(!(this.getWeapon() instanceof IntrinsicWeapon))
 			weapon = ", (holding " + this.getWeapon().toString()+")";
-		message = name + "(" + hitPoints + "/" + maxHitPoints + ")" + weapon + ", " + souls +" souls";
+		message = name + "(" + hitPoints + "/" + maxHitPoints + ")" + weapon + ", " + souls.getSouls() +" souls";
 		System.out.println(message);
 	}
 	
-	@Override
-	public String toString() {
-//		String message = "(no weapon)";
-//		if(!(this.getWeapon() instanceof IntrinsicWeapon))
-//			message = "(holding " + this.getWeapon().toString()+")";
-//		return name + "(" + hitPoints + "/" + maxHitPoints + ")" + message + ", " + souls +" souls";
-		return name;
-	}
-
+	/**
+	 * Method to place the token of soul
+	 * @param map		GameMap object
+	 * @param lastAction		Action object, the last action done by player
+	 */
 	public void placeTokenOfSoul(GameMap map, Action lastAction) {
 		TokenOfSoul token = new TokenOfSoul();
 		this.asSoul().transferSouls(token);
+		// If player died in valley, find the step behind and place the token of souls
 		if(map.locationOf(this).getGround().getDisplayChar()!='+')
 			map.locationOf(this).addItem(token);
 		else {

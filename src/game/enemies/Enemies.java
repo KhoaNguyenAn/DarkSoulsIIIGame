@@ -1,4 +1,5 @@
 package game.enemies;
+
 import java.util.ArrayList;
 
 import edu.monash.fit2099.engine.Actions;
@@ -6,23 +7,24 @@ import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.IntrinsicWeapon;
 import game.AttackAction;
-import game.AttackBehaviour;
-import game.FollowBehaviour;
-import game.RandomSkillBehaviour;
+import game.SoulsManager;
+import game.behaviours.AttackBehaviour;
+import game.behaviours.FollowBehaviour;
+import game.behaviours.RandomSkillBehaviour;
 import game.enums.Abilities;
 import game.enums.Status;
 import game.interfaces.Behaviour;
 import game.interfaces.Resettable;
+import game.interfaces.Soul;
 /**
- * Abstract Enemies class represent enemies
+ * Class representing enemies
  * @author Dongzheng Wu
- * @see Actor
  */
-public abstract class Enemies extends Actor implements Resettable{
+public abstract class Enemies extends Actor implements Resettable, Soul{
 	/**
 	 * The number of souls to reward after enemies was defeated
 	 */
-	private int souls;
+	private SoulsManager souls;
 	/**
 	 * The behaviours that the current enemy has
 	 */
@@ -36,7 +38,7 @@ public abstract class Enemies extends Actor implements Resettable{
 	 */
 	public Enemies(String name, char displayChar, int hitPoints, int souls) {
 		super(name, displayChar, hitPoints);
-		this.souls = souls;
+		this.souls = new SoulsManager(souls);	// Use SoulsManager to handle/store souls
 		registerInstance();		// Register enemies to reset list so that they can be reset
 	}
 	/**
@@ -53,13 +55,15 @@ public abstract class Enemies extends Actor implements Resettable{
 	@Override
 	public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) {
 		Actions actions = new Actions();
+		
+		// HOSTLE_TO_ENEMY status avoid enemies attack each other
 		if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
 			
-			// Allow player to attack enemies
+			// Allow player to attack this enemy
 			actions.add(new AttackAction(this,direction));
+			
+			// Allow player to use weapon skill to this enemy if they had
 			if(!(otherActor.getWeapon() instanceof IntrinsicWeapon)) {
-				
-				// Allow player to use weapon skill if they had
 				actions.add(otherActor.getWeapon().getActiveSkill(this, direction)); 
 			}
 			
@@ -84,5 +88,28 @@ public abstract class Enemies extends Actor implements Resettable{
 		if(!(this.getWeapon() instanceof IntrinsicWeapon))
 			message = "(holding " + this.getWeapon().toString()+")";
 		return name + "(" + hitPoints + "/" + maxHitPoints + ")" + message;
+	}
+	/**
+	 * Override transferSouls method (used to reward player after they defeat this enemy)
+	 */
+	@Override
+	public void transferSouls(Soul soulObject) {
+		soulObject.addSouls(souls.getSouls());
+		souls.clear();
+	}
+	/**
+	 * Add SOFTRESET status for soft reset.
+	 */
+	@Override
+	public void resetInstance() {
+		this.addCapability(Status.SOFTRESET);
+	}
+	/**
+	 * The enemies(skeleton/lord of cinder) will not be removed after reset, so they will exist.
+	 * For undead, it will be override in Undead class
+	 */
+	@Override
+	public boolean isExist() {
+		return true;
 	}
 }

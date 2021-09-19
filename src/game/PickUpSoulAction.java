@@ -1,15 +1,27 @@
-package edu.monash.fit2099.engine;
+package game;
 
-import game.TokenOfSoul;
-
+import edu.monash.fit2099.engine.Action;
+import edu.monash.fit2099.engine.Actor;
+import edu.monash.fit2099.engine.GameMap;
+/**
+ * Class represent pick up soul action
+ * @author Dongzheng Wu
+ */
 public class PickUpSoulAction extends Action{
-
+	/**
+	 * Attribute, the token of souls
+	 */
 	protected TokenOfSoul item;
-	
+	/**
+	 * 
+	 * Constructor
+	 */
 	public PickUpSoulAction(TokenOfSoul item) {
 		this.item = item;
 	}
-	
+	/**
+	 * Override execute method to allow player pick the token of souls and gain souls.
+	 */
 	@Override
 	public String execute(Actor actor, GameMap map) {
 		map.locationOf(actor).removeItem(item);
@@ -28,5 +40,4 @@ public class PickUpSoulAction extends Action{
 	public String menuDescription(Actor actor) {
 		return actor + " picks up the " + item;
 	}
-	
 }

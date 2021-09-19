@@ -1,8 +1,6 @@
 package game;
-import java.util.ArrayList;
-
 import edu.monash.fit2099.engine.*;
-import game.enums.Abilities;
+
 public class Heal extends WeaponAction{
 	protected Actor target;
 	public Heal(WeaponItem weaponItem, Actor target) {
@@ -26,5 +24,4 @@ public class Heal extends WeaponAction{
 	public String menuDescription(Actor actor) {
 		return actor + " Heal " + target;
 	}
-
 }

@@ -1,4 +1,4 @@
-package game;
+package game.terrains;
 
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Ground;
@@ -7,8 +7,7 @@ import game.enums.Abilities;
 
 /**
  * The gorge or endless gap that is dangerous for the Player.
- * Valley class represent valley, extends from Ground
- * @see Ground
+ * Class representing valley
  */
 public class Valley extends Ground {
 	/**
@@ -19,10 +18,9 @@ public class Valley extends Ground {
 	}
 
 	/**
-	 * FIXME: At the moment, the Player cannot enter it. It is boring.
-	 * FIXED: Now valley allow player to enter but not allow other actor to enter.
-	 * @param actor the Actor to check
-	 * @return false or actor cannot enter.
+	 * FIXED: Now valley allow player to enter but not allow other actor to enter
+	 * @param actor 	the Actor to check
+	 * @return true if allowed enter, otherwise return false
 	 */
 	@Override
 	public boolean canActorEnter(Actor actor){
@@ -32,14 +30,13 @@ public class Valley extends Ground {
 			return false;
 	}
 	/**
-	 * Check the player is step into valley or not, kill the player if it is.
+	 * Check the player is step into valley or not, kill the player if it is
 	 * @param The location of current valley
 	 */
 	public void tick(Location location) {
 		Actor player = location.getActor();
 		if(player != null) {
 			player.hurt(Integer.MAX_VALUE);
-			System.out.println("You fall into valley and dead"); // Used to indicate this is working.
 		}
 	}
 }

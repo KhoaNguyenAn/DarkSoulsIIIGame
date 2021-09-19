@@ -1,25 +1,16 @@
 package game.enemies;
 
-
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actions;
-import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.DoNothingAction;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.IntrinsicWeapon;
-import game.AttackAction;
-import game.AttackBehaviour;
-import game.FollowBehaviour;
-import game.InstantDieBehaviour;
-import game.WanderBehaviour;
-import game.enums.Abilities;
+import game.behaviours.InstantDieBehaviour;
+import game.behaviours.WanderBehaviour;
 import game.enums.Status;
 import game.interfaces.Behaviour;
 import game.interfaces.Resettable;
-
-import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * An undead class represent an undead
@@ -27,10 +18,6 @@ import java.util.Random;
  * @see Enemies
  */
 public class Undead extends Enemies implements Resettable{
-	/**
-	 * A random generator
-	 */
-	private final Random random = new Random();
 	/** 
 	 * Constructor of Undead
 	 * Undeads are represented by an 'u' with 50 hit points, 50 souls.
@@ -68,14 +55,7 @@ public class Undead extends Enemies implements Resettable{
 		return new IntrinsicWeapon(20, "punches");
 	}
 	/**
-	 * Add SOFTRESET status for soft reset.
-	 */
-	@Override
-	public void resetInstance() {
-		this.addCapability(Status.SOFTRESET);
-	}
-	/**
-	 * Undead will be removed from map, so return false.
+	 * Override isExist, Undead will be removed from map after reset, so return false.
 	 */
 	@Override
 	public boolean isExist() {

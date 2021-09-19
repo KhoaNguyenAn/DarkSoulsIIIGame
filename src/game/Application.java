@@ -8,10 +8,13 @@ import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.FancyGroundFactory;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.World;
-import game.enemies.Enemies;
 import game.enemies.LordOfCinder;
 import game.enemies.Skeleton;
-import game.enemies.Undead;
+import game.terrains.Cemetery;
+import game.terrains.Dirt;
+import game.terrains.Floor;
+import game.terrains.Valley;
+import game.terrains.Wall;
 
 /**
  * The main class for the Jurassic World game.
@@ -69,6 +72,9 @@ public class Application {
 			gameMap.at(10, 10).addActor(new Skeleton());
 			gameMap.at(20, 20).addActor(new Skeleton());
 			gameMap.at(52, 23).addActor(new Skeleton());
+			gameMap.at(30, 4).addActor(new Skeleton());
+			gameMap.at(33, 6).addActor(new Skeleton());
+			gameMap.at(31, 5).addActor(new Skeleton());
 			world.run();
 	}
 }

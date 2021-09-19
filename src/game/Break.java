@@ -1,8 +1,6 @@
 package game;
-import java.util.ArrayList;
 
 import edu.monash.fit2099.engine.*;
-import game.enums.Abilities;
 import game.enums.Status;
 public class Break extends WeaponAction{
 	protected Actor target;
@@ -29,7 +27,7 @@ public class Break extends WeaponAction{
 
 	@Override
 	public String menuDescription(Actor actor) {
-		return actor + " break the " + this.weapon.toString();
+		return actor + " enrages the " + this.weapon.toString();
 	}
 
 }
