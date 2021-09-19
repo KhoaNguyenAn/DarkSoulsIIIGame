@@ -10,6 +10,17 @@ public class BuyBroadswordAction extends BuyItemAction{
     }
 
     /**
+     * Returns a descriptive string
+     *
+     * @param actor The actor performing the action.
+     * @return the text we put on the menu
+     */
+    @Override
+    public String menuDescription(Actor actor) {
+        return actor +"purchase the Broad Sword" ;
+    }
+
+    /**
      * Perform the Action.
      *
      * @param actor The actor performing the action.
@@ -18,10 +29,10 @@ public class BuyBroadswordAction extends BuyItemAction{
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        if(subtractSouls(500)==true){
-            BroadSword broadSword=new BroadSword("BroadSword",'q',30,"slash",80,"Critical Strike");
+        if(actor.asSoul().subtractSouls(500)== true){
+            BroadSword broadSword=new BroadSword();
             SwapWeaponAction swapWeaponAction=new SwapWeaponAction(broadSword);
-//             swapWeaponAction.execute(player,gameMap.);
+             swapWeaponAction.execute(actor, map);
             return "Purchased BroadSword";
         }
         return "Purchased Failed";

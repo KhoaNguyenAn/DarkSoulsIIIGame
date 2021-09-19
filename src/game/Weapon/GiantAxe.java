@@ -1,8 +1,6 @@
 package game.Weapon;
 
 import edu.monash.fit2099.engine.Action;
-import edu.monash.fit2099.engine.Actor;
-import game.SpinAttackAction;
 
 import java.util.List;
 
@@ -23,6 +21,13 @@ public class GiantAxe extends Axe {
 
     }
 
+    public GiantAxe() {
+        super("GiantAxe",'G',70,"chop",60);
+
+
+
+    }
+
     /**
      * Get an action or skill from the weapon that will be used against one target.
      * This method allows weapon instance to interact with Actor class.
@@ -33,10 +38,10 @@ public class GiantAxe extends Axe {
      * @return null by default because a weapon doesn't have any active skill. Otherwise, return a WeaponAction instance.
      * @see WeaponItem#allowableActions for a self-direction skill instead of using this method (recommendation)
      */
-    @Override
-    public SpinAttackAction getActiveSkill(Actor target, String direction) {
-        return  new SpinAttackAction(target,direction);
-    }
+//    @Override
+//    public WeaponAction getActiveSkill(Actor target, String direction) {
+//        return  new SpinAttackAction(target,direction);
+//    }
 
     /**
      * Getter.

@@ -1,22 +1,17 @@
 package game.enemies;
 
-import java.util.Random;
-
-import edu.monash.fit2099.engine.Action;
-import edu.monash.fit2099.engine.Actions;
-import edu.monash.fit2099.engine.Display;
-import edu.monash.fit2099.engine.DoNothingAction;
-import edu.monash.fit2099.engine.GameMap;
-import edu.monash.fit2099.engine.Location;
-import game.HeavySword;
-import game.MagicWand;
+import edu.monash.fit2099.engine.*;
+import game.Weapon.BroadSword;
+import game.Weapon.GiantAxe;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.ReviveBehaviour;
 import game.behaviours.WanderBehaviour;
+import game.enums.Abilities;
 import game.enums.Status;
 import game.interfaces.Behaviour;
 import game.interfaces.Resettable;
-import game.enums.Abilities;
+
+import java.util.Random;
 /**
  * Skeleton class represent a skeleton
  * @author Dongzheng Wu
@@ -78,8 +73,8 @@ public class Skeleton extends Enemies implements Resettable{
 	 */
 	private void randomWeapon() {
 		if(random.nextInt(100)<50)
-			this.addItemToInventory(new HeavySword());
+			this.addItemToInventory(new BroadSword());
 		else
-			this.addItemToInventory(new MagicWand());
+			this.addItemToInventory(new GiantAxe());
 	}
 }

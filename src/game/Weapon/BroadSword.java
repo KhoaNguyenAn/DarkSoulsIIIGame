@@ -22,6 +22,10 @@ public class BroadSword  extends Sword{
 
 
     }
+    public BroadSword(){
+        super("BroadSword", 'b',30, "slash", 80,"critical Strike");
+        soulPrice=500;
+    }
 
     /**
      * Accessor for damage done by this weapon.
