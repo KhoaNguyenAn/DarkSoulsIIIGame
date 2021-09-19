@@ -34,6 +34,7 @@ public class WindSlashAction extends Action {
         this.direction = direction;
     }
 
+
     @Override
     public String execute(Actor actor, GameMap map) {
 
