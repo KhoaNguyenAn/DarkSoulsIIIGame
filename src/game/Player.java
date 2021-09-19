@@ -12,7 +12,8 @@ import game.enums.Abilities;
 import game.enums.Status;
 import game.interfaces.Resettable;
 import game.interfaces.Soul;
-
+import game.EstusFlask;
+import game.Bonfire;
 /**
  * Class representing the Player.
  */
@@ -23,7 +24,8 @@ public class Player extends Actor implements Soul, Resettable {
 	private SoulsManager souls;
 
 	private final Menu menu = new Menu();
-
+	private EstusFlask estusFlask;
+	private BroadSword broadSword;
 	/**
 	 * Constructor.
 	 *
@@ -185,4 +187,18 @@ public class Player extends Actor implements Soul, Resettable {
 			map.at(x, y).addItem(token);
 		}
 	}
+
+	@Override
+	public void resetInstance() {
+		hitPoints = maxHitPoints;
+		// need to set to max int because hit point might get negative number
+		this.heal(Integer.MAX_VALUE);
+	}
+
+	@Override
+	public boolean isExist() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
