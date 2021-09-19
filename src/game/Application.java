@@ -1,6 +1,7 @@
 package game;
 
 import edu.monash.fit2099.engine.*;
+import game.Weapon.*;
 import game.enemies.LordOfCinder;
 import game.enemies.Skeleton;
 import game.terrains.*;
