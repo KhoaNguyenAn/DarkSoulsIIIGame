@@ -1,13 +1,13 @@
 package game;
 
 import edu.monash.fit2099.engine.*;
-import game.enemies.LordOfCinder;
-import game.enemies.Skeleton;
+import game.enemies.*;
 import game.terrains.*;
 
 import java.util.Arrays;
 import java.util.List;
-
+import game.Weapon.StormRuler;
+import game.Bonfire;
 /**
  * The main class for the Jurassic World game.
  *
@@ -18,7 +18,7 @@ public class Application {
 
 			World world = new World(new Display());
 
-			FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Valley(), new Cemetery());
+			FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Valley(), new Cemetery(), new Bonfire());
 
 			List<String> map = Arrays.asList(
 					"..++++++..+++...........................++++......+++.................+++.......",
@@ -32,7 +32,7 @@ public class Application {
 					".............................................................+++++++............",
 					"..................................###___###...................+++...............",
 					"..................................#_______#......................+++............",
-					"....c......++.....................#_______#.......................+.............",
+					"....c......++.....................#___B___#.......................+.............",
 					".........+++......................#_______#........................++...........",
 					"............+++...................####_####..........................+..........",
 					"..............+......................................................++.........",
