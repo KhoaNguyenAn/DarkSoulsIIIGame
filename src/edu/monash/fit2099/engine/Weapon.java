@@ -1,7 +1,5 @@
 package edu.monash.fit2099.engine;
 
-import game.SpinAttackAction;
-
 /**
  * Interface for weapon items.
  *
@@ -42,7 +40,7 @@ public interface Weapon {
 	 * @param direction the direction of target, e.g. "north"
 	 * @return null by default because a weapon doesn't have any active skill. Otherwise, return a WeaponAction instance.
 	 */
-	default SpinAttackAction getActiveSkill(Actor target, String direction){
+	default WeaponAction getActiveSkill(Actor target, String direction){
 		return null;
 	}
 }

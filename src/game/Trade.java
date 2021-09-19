@@ -49,7 +49,7 @@ public class Trade implements Soul,Purchasable {
 
     public void buyGiantAxe(){
         if(subtractSouls(1000)==true){
-            GiantAxe giantAxe= new GiantAxe("GiantAxe",'A',70,"chop",60);
+            GiantAxe giantAxe= new GiantAxe("GiantAxe",'G',70,"chop",60);
             SwapWeaponAction swapWeaponAction=new SwapWeaponAction(giantAxe);
             //swapWeaponAction.execute(Player,)
 

@@ -17,6 +17,10 @@ public class Vendor extends Actor {
         super("Vendor", 'F', 0);
     }
 
+    public Vendor() {
+        super("Vendor",'F',0);
+    }
+
     /**
      * Select and return an action to perform on the current turn.
      *
@@ -28,7 +32,8 @@ public class Vendor extends Actor {
      */
     @Override
     public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
-        return null;
+
+        return new DoNothingAction();
     }
 
     /**
@@ -47,7 +52,7 @@ public class Vendor extends Actor {
 
             // Add follow and attack behaviour to enemies
             actions.add(new BuyBroadswordAction());
-            actions.add(new BuyGiantAxe());
+            actions.add(new BuyGiantAxeAction());
 
 
 

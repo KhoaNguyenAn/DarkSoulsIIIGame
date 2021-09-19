@@ -16,6 +16,10 @@ public class StormRuler extends Sword {
 
     }
 
+    public StormRuler() {
+        super("StormRuler", '7', 50, "blow", 60, "critical strike, Dullness");
+
+    }
     /**
      * Accessor for damage done by this weapon.
      *

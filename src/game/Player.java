@@ -1,19 +1,11 @@
 package game;
 
-import edu.monash.fit2099.engine.Action;
-import edu.monash.fit2099.engine.Actions;
-import edu.monash.fit2099.engine.Actor;
-import edu.monash.fit2099.engine.Display;
-import edu.monash.fit2099.engine.DoNothingAction;
-import edu.monash.fit2099.engine.GameMap;
-import edu.monash.fit2099.engine.IntrinsicWeapon;
-import edu.monash.fit2099.engine.Menu;
+import edu.monash.fit2099.engine.*;
+import game.Weapon.BroadSword;
 import game.enums.Abilities;
 import game.enums.Status;
 import game.interfaces.Resettable;
 import game.interfaces.Soul;
-import game.EstusFlask;
-import game.Bonfire;
 /**
  * Class representing the Player.
  */
@@ -24,8 +16,8 @@ public class Player extends Actor implements Soul, Resettable {
 	private SoulsManager souls;
 
 	private final Menu menu = new Menu();
-	private EstusFlask estusFlask;
-	private BroadSword broadSword;
+//	private EstusFlask estusFlask;
+//	private BroadSword broadSword;
 	/**
 	 * Increase current maximum hp. Current hitPoints becomes new maxHitPoints.
 	 *
@@ -56,21 +48,16 @@ public class Player extends Actor implements Soul, Resettable {
 	 */
 	public Player(String name, char displayChar, int hitPoints) {
 		super(name, displayChar, hitPoints);
-<<<<<<< src/game/Player.java
-		this.addCapability(Status.HOSTILE_TO_ENEMY);
-		this.addCapability(Abilities.REST);
-		this.addCapability(Abilities.BUY_ITEMS);
-=======
 		this.addCapability(Status.HOSTILE_TO_ENEMY);	// To distinguish between enemies and player
 		this.addCapability(Abilities.REST);		// Ability to rest on bonfire
 		this.addCapability(Abilities.FALL);		// Ability to fall from valley
 		this.addCapability(Abilities.BUY_ITEMS); // Ability to buy items from Vendor
 		this.addCapability(Abilities.ENTER);	// Ability to enter the floor
 		this.addCapability(Abilities.PLAYER); // Player will not be removed from map after dead.
-		this.addItemToInventory(new Gun());	  //TODO: Change to broad sword
-		this.souls = new SoulsManager();	// Use SoulsManager to handle/store souls
+		this.addItemToInventory(new BroadSword());	  //
+		this.souls = new SoulsManager(10000);	// Use SoulsManager to handle/store souls
 		registerInstance();		// Register to reset list
->>>>>>> src/game/Player.java
+
 	}
 
 	@Override
@@ -131,12 +118,12 @@ public class Player extends Actor implements Soul, Resettable {
 		soulObject.addSouls(souls.getSouls());
 		souls.clear();
 	}
-<<<<<<< src/game/Player.java
-	public void buyitems(){
-		//reference to player
-		//Player
-	}
-=======
+
+//	public void buyitems(){
+//		//reference to player
+//		//Player
+//	}
+
 	/**
 	 * Override the addSouls so that player can gain souls
 	 */
@@ -221,19 +208,4 @@ public class Player extends Actor implements Soul, Resettable {
 			map.at(x, y).addItem(token);
 		}
 	}
-
-	@Override
-	public void resetInstance() {
-		hitPoints = maxHitPoints;
-		// need to set to max int because hit point might get negative number
-		this.heal(Integer.MAX_VALUE);
-	}
-
-	@Override
-	public boolean isExist() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
->>>>>>> src/game/Player.java
 }
