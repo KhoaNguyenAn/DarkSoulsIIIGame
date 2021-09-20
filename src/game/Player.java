@@ -213,4 +213,10 @@ public class Player extends Actor implements Soul, Resettable {
 			map.at(x, y).addItem(token);
 		}
 	}
+
+
+	public Location getBonfireLocation() {
+		return this.bonfireLocation;
+	}
+
 }
