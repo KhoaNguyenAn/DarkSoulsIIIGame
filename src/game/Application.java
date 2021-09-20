@@ -1,14 +1,13 @@
 package game;
 
 import edu.monash.fit2099.engine.*;
-import game.Weapon.*;
-import game.enemies.LordOfCinder;
-import game.enemies.Skeleton;
+import game.enemies.*;
 import game.terrains.*;
 
 import java.util.Arrays;
 import java.util.List;
-
+import game.Weapon.StormRuler;
+import game.Bonfire;
 /**
  * The main class for the Jurassic World game.
  *
@@ -19,7 +18,7 @@ public class Application {
 
 			World world = new World(new Display());
 
-			FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Valley(), new Cemetery());
+			FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Valley(), new Cemetery(), new Bonfire());
 
 			List<String> map = Arrays.asList(
 					"..++++++..+++...........................++++......+++.................+++.......",
@@ -33,7 +32,7 @@ public class Application {
 					".............................................................+++++++............",
 					"..................................###___###...................+++...............",
 					"..................................#_______#......................+++............",
-					"....c......++.....................#_______#.......................+.............",
+					"....c......++.....................#___B___#.......................+.............",
 					".........+++......................#_______#........................++...........",
 					"............+++...................####_####..........................+..........",
 					"..............+......................................................++.........",
@@ -51,13 +50,14 @@ public class Application {
 			GameMap gameMap = new GameMap(groundFactory, map);
 			world.addGameMap(gameMap);
 
-			Actor player = new Player("Unkindled (Player)", '@', 100);
-//			player.addItemToInventory(new EstusFlask());
+			Location bonfire = gameMap.at(38,11);
+
+
+			Actor player = new Player("Unkindled (Player)", '@', 100, bonfire);
 			world.addPlayer(player, gameMap.at(38, 12));
 
 
-
-
+			
 			// Place Yhorm the Giant/boss in the map
 			gameMap.at(6, 25).addActor(new LordOfCinder("Yhorm the Giant", 'Y', 500));
 			gameMap.at(7, 25).addItem(new StormRuler());

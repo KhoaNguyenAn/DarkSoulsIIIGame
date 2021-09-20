@@ -5,6 +5,10 @@ import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Actor;
 
 public class Rest extends Action {
+
+    public void Rest(){
+        
+    }
     
     /**
 	 * Perform the Action.
@@ -15,8 +19,9 @@ public class Rest extends Action {
 	 */
     @Override
 	public String execute(Actor actor, GameMap map) {
-        this.resetEnemises();
-        this.resetPlayer(actor,map);
+		actor.heal(Integer.MAX_VALUE/2);
+        ResetManager manager = ResetManager.getInstance();
+		manager.run();
         return "Player is resting";
     }
 
@@ -27,14 +32,7 @@ public class Rest extends Action {
 	 */
     @Override
 	public String menuDescription(Actor actor) {
-        return "null";
+        return "Rest at Bonfire";
     }
 
-    public void resetPlayer(Actor actor, GameMap map) {
-
-    }
-
-    public void resetEnemises() {
-
-    }
 }
