@@ -15,6 +15,7 @@ public class Player extends Actor implements Soul, Resettable {
 	 * The number of souls to reward after enemies was defeated
 	 */
 	private SoulsManager souls;
+	private Location bonfireLocation;
 
 	private final Menu menu = new Menu();
 //	private EstusFlask estusFlask;
@@ -47,7 +48,7 @@ public class Player extends Actor implements Soul, Resettable {
 	 * @param displayChar Character to represent the player in the UI
 	 * @param hitPoints   Player's starting number of hitpoints
 	 */
-	public Player(String name, char displayChar, int hitPoints) {
+	public Player(String name, char displayChar, int hitPoints, Location bonfire) {
 		super(name, displayChar, hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);	// To distinguish between enemies and player
 		this.addCapability(Abilities.REST);		// Ability to rest on bonfire
@@ -58,6 +59,7 @@ public class Player extends Actor implements Soul, Resettable {
 		this.addItemToInventory(new BroadSword());	  //
 		this.addItemToInventory(new EstusFlask(this.maxHitPoints));
 		this.souls = new SoulsManager(10000);	// Use SoulsManager to handle/store souls
+		this.bonfireLocation = bonfire;
 		registerInstance();		// Register to reset list
 
 	}
@@ -99,7 +101,8 @@ public class Player extends Actor implements Soul, Resettable {
 			// Heal the player twice because the player may hurt before falling valley, in this case
 			// one heal cannot get to the maximum.
 			this.heal(maxHitPoints);
-			map.moveActor(this, map.at(38, 11));
+			//map.moveActor(this, map.at(38, 11));
+			map.moveActor(this, map.at(this.bonfireLocation.x(), this.bonfireLocation.y() + 1));
 			this.removeCapability(Status.SOFTRESET);
 		}
 		return new DoNothingAction();

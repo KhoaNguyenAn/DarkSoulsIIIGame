@@ -50,12 +50,14 @@ public class Application {
 			GameMap gameMap = new GameMap(groundFactory, map);
 			world.addGameMap(gameMap);
 
-			Actor player = new Player("Unkindled (Player)", '@', 100);
-//			player.addItemToInventory(new EstusFlask());
+			Location bonfire = gameMap.at(38,11);
+
+
+			Actor player = new Player("Unkindled (Player)", '@', 100, bonfire);
 			world.addPlayer(player, gameMap.at(38, 12));
 
 
-
+			
 			// Place Yhorm the Giant/boss in the map
 			gameMap.at(6, 25).addActor(new LordOfCinder("Yhorm the Giant", 'Y', 500));
 			gameMap.at(7, 25).addItem(new StormRuler());
