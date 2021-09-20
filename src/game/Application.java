@@ -73,7 +73,7 @@ public class Application {
 			gameMap.at(30, 4).addActor(new Skeleton());
 			gameMap.at(33, 6).addActor(new Skeleton());
 			gameMap.at(31, 5).addActor(new Skeleton());
-			gameMap.at(38, 10).addActor(new Vendor());
+			gameMap.at(37, 11).addActor(new Vendor());
 			world.run();
 	}
 }

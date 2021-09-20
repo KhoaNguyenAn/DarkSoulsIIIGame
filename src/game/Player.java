@@ -101,8 +101,7 @@ public class Player extends Actor implements Soul, Resettable {
 			// Heal the player twice because the player may hurt before falling valley, in this case
 			// one heal cannot get to the maximum.
 			this.heal(maxHitPoints);
-			//map.moveActor(this, map.at(38, 11));
-			map.moveActor(this, map.at(this.bonfireLocation.x(), this.bonfireLocation.y() + 1));
+			map.moveActor(this, map.at(this.bonfireLocation.x(), this.bonfireLocation.y()));
 			this.removeCapability(Status.SOFTRESET);
 		}
 		return new DoNothingAction();

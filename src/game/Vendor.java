@@ -2,7 +2,7 @@ package game;
 
 import edu.monash.fit2099.engine.*;
 import game.enums.Abilities;
-
+import game.IncreaseMaxHpAction;
 public class Vendor extends Actor {
 
 
@@ -53,7 +53,7 @@ public class Vendor extends Actor {
             // Add follow and attack behaviour to enemies
             actions.add(new BuyBroadswordAction());
             actions.add(new BuyGiantAxeAction());
-
+            actions.add(new IncreaseMaxHpAction());
 
 
 

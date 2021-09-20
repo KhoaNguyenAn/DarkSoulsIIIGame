@@ -22,7 +22,7 @@ public class Drink extends Action {
         }
     }
   	public String menuDescription(Actor actor) {
-        return "Player are drinking";
+        return "Drink Estus Flask";
     }
  
     public void displayCharges(Actor currentPlayer) {

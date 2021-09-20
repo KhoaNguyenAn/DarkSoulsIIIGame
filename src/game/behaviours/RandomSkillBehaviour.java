@@ -41,7 +41,7 @@ public class RandomSkillBehaviour implements Behaviour{
 		Location here = map.locationOf(actor);
 		Location there = map.locationOf(target);
 		int currentDistance = distance(here, there);
-		if(random.nextInt(100)<50 && currentDistance <= 2) {
+		if(random.nextInt(100)<50 && currentDistance < 2) {
 			return actor.getWeapon().getActiveSkill(target, null);
 		}
 		return null;
