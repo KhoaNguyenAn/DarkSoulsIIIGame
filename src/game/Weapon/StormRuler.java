@@ -2,7 +2,10 @@ package game.Weapon;
 
 
 import edu.monash.fit2099.engine.Action;
+import edu.monash.fit2099.engine.Actor;
+import edu.monash.fit2099.engine.WeaponAction;
 import game.ChargeAction;
+import game.WindSlashAction;
 
 import java.util.List;
 
@@ -50,6 +53,33 @@ public class StormRuler extends Sword {
 
 
     /**
+     * Get an action or skill from the weapon that will be used against one target.
+     * This method allows weapon instance to interact with Actor class.
+     * It can be used to have actionable special attack, heal, silence, etc. to a target
+     *
+     * @param target    the target actor
+     * @param direction the direction of target, e.g. "north"
+     * @return null by default because a weapon doesn't have any active skill. Otherwise, return a WeaponAction instance.
+//     * @see WeaponItem#allowableActions for a self-direction skill instead of using this method (recommendation)
+//     */int charge=0;
+    @Override
+    public WeaponAction getActiveSkill(Actor target, String direction) {
+
+
+        ChargeAction chargeAction=new ChargeAction(new StormRuler());
+        if (charge<3){
+            charge++;
+            return chargeAction;
+
+        } else {
+            charge=0;
+            return new WindSlashAction(new StormRuler(), target);
+        }
+
+
+    }
+
+    /**
      * Getter.
      * <p>
      * Returns an unmodifiable copy of the actions list so that calling methods won't
@@ -59,8 +89,6 @@ public class StormRuler extends Sword {
      */
     @Override
     public List<Action> getAllowableActions() {
-        getAllowableActions().add(new ChargeAction());
-//        getAllowableActions().add(new WindSlashAction());
         return super.getAllowableActions();
     }
 }

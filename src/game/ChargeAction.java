@@ -1,11 +1,22 @@
 package game;
 
-import edu.monash.fit2099.engine.Action;
-import edu.monash.fit2099.engine.Actor;
-import edu.monash.fit2099.engine.GameMap;
+import edu.monash.fit2099.engine.*;
 
-public class ChargeAction  extends Action {
-    protected int chargeCounter=0;
+public class ChargeAction  extends WeaponAction {
+
+
+    private static int chargeCounter;
+
+    /**
+     * Constructor
+     *
+     * @param weaponItem the weapon item that has capabilities
+     */
+    public ChargeAction(WeaponItem weaponItem) {
+        super(weaponItem);
+         int chargeCounter=0;
+    }
+
     /**
      * Perform the Action.
      *
@@ -15,12 +26,14 @@ public class ChargeAction  extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        if (chargeCounter==3){
+
+       ChargeAction.chargeCounter++;
+        if (ChargeAction.chargeCounter==3){
 
             return "Charge 3/3 Finish!";
         }else {
-            chargeCounter++;
-            return "StormRuler Charged"+chargeCounter+"/3";
+
+            return "StormRuler Charged"+ChargeAction.chargeCounter+"/3";
         }
     }
 
@@ -32,7 +45,7 @@ public class ChargeAction  extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return null;
+        return actor + " charges  Storm Ruler ";
     }
 
 

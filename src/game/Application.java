@@ -57,6 +57,7 @@ public class Application {
 
 
 
+
 			// Place Yhorm the Giant/boss in the map
 			gameMap.at(6, 25).addActor(new LordOfCinder("Yhorm the Giant", 'Y', 500));
 			gameMap.at(7, 25).addItem(new StormRuler());

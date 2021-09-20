@@ -7,7 +7,7 @@ import java.util.Random;
 /**
  * Special Action for attacking other Actors.
  */
-public class WindSlashAction extends Action {
+public class WindSlashAction extends WeaponAction {
 
     /**
      * The Actor that is to be attacked
@@ -29,9 +29,9 @@ public class WindSlashAction extends Action {
      *
      * @param target the Actor to attack
      */
-    public WindSlashAction(Actor target, String direction) {
-        this.target = target;
-        this.direction = direction;
+    public WindSlashAction(WeaponItem weaponItem , Actor target) {
+        super(weaponItem);
+        this.target=target;
     }
 
 
@@ -66,6 +66,6 @@ public class WindSlashAction extends Action {
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " attacks " + target + " at " + direction;
+        return actor + " wind slashes " + target ;
     }
 }
