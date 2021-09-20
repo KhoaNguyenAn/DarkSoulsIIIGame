@@ -3,8 +3,10 @@ package game.Weapon;
 
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actor;
+import edu.monash.fit2099.engine.PickUpItemAction;
 import edu.monash.fit2099.engine.WeaponAction;
 import game.ChargeAction;
+import game.SwapWeaponAction;
 import game.WindSlashAction;
 
 import java.util.List;
@@ -91,5 +93,15 @@ public class StormRuler extends Sword {
     public List<Action> getAllowableActions() {
         return super.getAllowableActions();
     }
+    /**
+     * Override getPickUpAction to allow swap the weapon
+     */
+    @Override
+    public PickUpItemAction getPickUpAction(Actor actor) {
+		if(portable)
+			return new SwapWeaponAction(this);
+		
+		return null;
+	}
 }
 

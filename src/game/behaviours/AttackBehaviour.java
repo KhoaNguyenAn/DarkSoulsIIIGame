@@ -38,7 +38,7 @@ public class AttackBehaviour implements Behaviour{
 		Location here = map.locationOf(actor);
 		Location there = map.locationOf(target);
 		int currentDistance = distance(here, there);
-		if(currentDistance <= 2) {
+		if(currentDistance < 2) {
 			return new AttackAction(target, null);
 		}
 		return null;

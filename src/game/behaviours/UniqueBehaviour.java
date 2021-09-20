@@ -48,7 +48,7 @@ public class UniqueBehaviour implements Behaviour{
 		int currentDistance = distance(here, there);
 		
 		// Check the current hit points
-		if((hitPoints < maxHitPoints/2) && currentDistance <= 2)
+		if((hitPoints < maxHitPoints/2) && currentDistance < 2)
 			return actor.getWeapon().getActiveSkill(target, null);
 		return null;
 	}

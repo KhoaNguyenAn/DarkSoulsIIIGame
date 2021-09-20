@@ -1,6 +1,7 @@
 package game;
 
 import edu.monash.fit2099.engine.*;
+import game.enums.Status;
 
 import java.util.Random;
 
@@ -44,6 +45,7 @@ public class WindSlashAction extends WeaponAction {
         int damage = weapon.damage()*2;
         String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
         target.hurt(damage);
+        target.addCapability(Status.STUNNED);
 //        DoNothingAction doNothingAction=new DoNothingAction();
 //        doNothingAction.execute(target,map);
         //Stun Target target.
