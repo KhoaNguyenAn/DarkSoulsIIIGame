@@ -19,7 +19,7 @@ public class Rest extends Action {
 	 */
     @Override
 	public String execute(Actor actor, GameMap map) {
-		actor.heal(Integer.MAX_VALUE);
+		actor.heal(Integer.MAX_VALUE/2);
 		map.moveActor(actor, map.at(38, 11));
         ResetManager manager = ResetManager.getInstance();
 		manager.run();
