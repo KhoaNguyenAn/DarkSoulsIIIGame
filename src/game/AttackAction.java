@@ -119,7 +119,7 @@ public class AttackAction extends Action {
 	        			+ "                                                                                                                                                                                                                                                                                                                                                                                                            \n"
 	        			+ "                                                                                                                                                                                                                                                                                                                                                                                                            \n"
 	        			+ "");
-	        map.locationOf(target).addItem(new PortableItem("Cinders of a Lord", '='));
+	        map.locationOf(target).addItem(new PortableItem("Cinders of a Lord", '%'));
 	        map.removeActor(target);
 	        target.asSoul().transferSouls(actor.asSoul()); 		// After defeat enemy, gain souls
 			}

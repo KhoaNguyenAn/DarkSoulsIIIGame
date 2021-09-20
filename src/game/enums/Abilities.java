@@ -9,7 +9,7 @@ public enum Abilities {
     FALL,   // To fall from valley
     ENTER,  // To enter the floor
     REVIVE, // To revive skeleton or player
-    BOSS,
+    BOSS,	// To display messages after BOSS dead, distinguish it from enemies
     PLAYER, // To display messages after player dead
 
 }
