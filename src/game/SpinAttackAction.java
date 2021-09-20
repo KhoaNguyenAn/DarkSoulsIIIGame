@@ -3,12 +3,13 @@ package game;
 
 import edu.monash.fit2099.engine.*;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
  * Special Action for attacking other Actors.
  */
-public class SpinAttackAction extends Action {
+public class SpinAttackAction extends WeaponAction {
 
     /**
      * The Actor that is to be attacked
@@ -26,27 +27,43 @@ public class SpinAttackAction extends Action {
     protected Random rand = new Random();
 
     /**
-     * Constructor.
+     * Constructor
      *
-     * @param target the Actor to attack
+     * @param weaponItem the weapon item that has capabilities
      */
-    public SpinAttackAction(Actor target, String direction) {
-        this.target = target;
-        this.direction = direction;
+    public SpinAttackAction(WeaponItem weaponItem , Actor target) {
+        super(weaponItem);
+        this.target=target;
     }
+
+
+
 
     @Override
     public String execute(Actor actor, GameMap map) {
 
         Weapon weapon = actor.getWeapon();
 
-        if (map.isAnActorAt(map.locationOf(actor))) {
-            return actor + " misses " + target + ".";
-        }
+
+
 
         int damage = weapon.damage()/2;
         String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
-        target.hurt(damage);
+        Location bossLocation=map.locationOf(actor);
+        ArrayList <Actor> targetList = new ArrayList<Actor>();
+        for ( int x=bossLocation.x()-1 ;x<=bossLocation.x()+1;x++){
+            for ( int y=bossLocation.y()-1;y<=bossLocation.y()+1;y++){
+                if (map.at(x,y).containsAnActor()){
+                   targetList.add(map.at(x,y).getActor());
+                }
+
+            }
+        }
+        targetList.remove(actor);
+        for (int i=0; i<targetList.size();i++){
+            targetList.get(i).hurt(damage);
+        }
+
         if (!target.isConscious()) {
             Actions dropActions = new Actions();
             // drop all items
@@ -65,6 +82,6 @@ public class SpinAttackAction extends Action {
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " attacks " + target + " at " + direction;
+        return actor + " spin attacks " + target + " at all directions ";
     }
 }

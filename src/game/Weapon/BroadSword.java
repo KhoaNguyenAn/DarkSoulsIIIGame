@@ -1,8 +1,6 @@
 package game.Weapon;
 
 
-
-
 public class BroadSword  extends Sword{
 
 

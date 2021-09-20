@@ -1,6 +1,9 @@
 package game.Weapon;
 
 import edu.monash.fit2099.engine.Action;
+import edu.monash.fit2099.engine.Actor;
+import edu.monash.fit2099.engine.WeaponAction;
+import game.SpinAttackAction;
 
 import java.util.List;
 
@@ -38,10 +41,10 @@ public class GiantAxe extends Axe {
      * @return null by default because a weapon doesn't have any active skill. Otherwise, return a WeaponAction instance.
      * @see WeaponItem#allowableActions for a self-direction skill instead of using this method (recommendation)
      */
-//    @Override
-//    public WeaponAction getActiveSkill(Actor target, String direction) {
-//        return  new SpinAttackAction(target,direction);
-//    }
+    @Override
+    public WeaponAction getActiveSkill(Actor target, String direction) {
+        return  new SpinAttackAction( new GiantAxe(),target);
+    }
 
     /**
      * Getter.
