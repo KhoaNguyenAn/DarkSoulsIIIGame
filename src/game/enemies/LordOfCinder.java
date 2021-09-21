@@ -2,7 +2,8 @@ package game.enemies;
 
 import edu.monash.fit2099.engine.*;
 import game.AttackAction;
-import game.HeavySword;
+import game.StunAction;
+import game.Weapon.YhormsGiantMachete;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.UniqueBehaviour;
@@ -28,7 +29,7 @@ public class LordOfCinder extends Enemies implements Resettable{
     public LordOfCinder(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints, 5000);
         this.addCapability(Abilities.BOSS);		// Used for some boss feature.
-        this.addItemToInventory(new HeavySword());		//TODO: need Change to Yhorm’s Great Machete 
+        this.addItemToInventory(new YhormsGiantMachete());
     }
 
     /**
@@ -43,6 +44,11 @@ public class LordOfCinder extends Enemies implements Resettable{
     	// Add location of Lord of cinder
     	if (location == null)
 			location = map.locationOf(this);
+    	
+    	if(this.hasCapability(Status.STUNNED)) {
+    		this.removeCapability(Status.STUNNED);
+    		return new StunAction();
+    	}
     	
     	// If soft reset is triggered, move this enemy to original position, heal it, remove status.
     	if(this.hasCapability(Status.SOFTRESET)) {
@@ -82,9 +88,9 @@ public class LordOfCinder extends Enemies implements Resettable{
 			}
 			
 			// Add follow, attack and unique behaviour to lord of cinder
-			behaviours.add(0, new FollowBehaviour(otherActor));
-			behaviours.add(0, new AttackBehaviour(otherActor));
-			behaviours.add(0, new UniqueBehaviour(otherActor, hitPoints, maxHitPoints));
+			behaviours.add(new FollowBehaviour(otherActor));
+			behaviours.add(0, new AttackBehaviour());
+			behaviours.add(0, new UniqueBehaviour(hitPoints, maxHitPoints));
 		}
 		return actions;
 	}

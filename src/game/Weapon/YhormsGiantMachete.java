@@ -10,7 +10,7 @@ public class YhormsGiantMachete extends Axe {
      * @param verb        verb to use for this weapon, e.g. "hits", "zaps"
      * @param hitRate     the probability/chance to hit the target.
      */
-    public YhormsGiantMachete(String name, char displayChar, int damage, String verb, int hitRate) {
+    public YhormsGiantMachete() {
         super("YhormsGiantMachete", 'M', 95, "Beat", 60);
     }
 

@@ -58,7 +58,7 @@ public class Player extends Actor implements Soul, Resettable {
 		this.addCapability(Abilities.PLAYER); // Player will not be removed from map after dead.
 		this.addItemToInventory(new BroadSword());	  //
 		this.addItemToInventory(new EstusFlask(this.maxHitPoints));
-		this.souls = new SoulsManager(10000);	// Use SoulsManager to handle/store souls
+		this.souls = new SoulsManager(0);	// Use SoulsManager to handle/store souls
 		this.bonfireLocation = bonfire;
 		registerInstance();		// Register to reset list
 
@@ -101,8 +101,7 @@ public class Player extends Actor implements Soul, Resettable {
 			// Heal the player twice because the player may hurt before falling valley, in this case
 			// one heal cannot get to the maximum.
 			this.heal(maxHitPoints);
-			//map.moveActor(this, map.at(38, 11));
-			map.moveActor(this, map.at(this.bonfireLocation.x(), this.bonfireLocation.y() + 1));
+			map.moveActor(this, map.at(this.bonfireLocation.x(), this.bonfireLocation.y()));
 			this.removeCapability(Status.SOFTRESET);
 		}
 		return new DoNothingAction();
