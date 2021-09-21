@@ -1,13 +1,14 @@
 package game;
 
+
 import edu.monash.fit2099.engine.*;
-import game.enemies.*;
+import game.Weapon.StormRuler;
+import game.enemies.LordOfCinder;
+import game.enemies.Skeleton;
 import game.terrains.*;
 
 import java.util.Arrays;
 import java.util.List;
-import game.Weapon.StormRuler;
-import game.Bonfire;
 /**
  * The main class for the Jurassic World game.
  *
