@@ -6,6 +6,8 @@ package game.enums;
 public enum Abilities {
     REST,
     BUY_ITEMS,
+    CHARGE,
+    SPIN_ATTACK,
     FALL,   // To fall from valley
     ENTER,  // To enter the floor
     REVIVE, // To revive skeleton or player

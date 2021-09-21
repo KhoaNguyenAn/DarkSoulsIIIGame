@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.WeaponAction;
 import game.SpinAttackAction;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GiantAxe extends Axe {
@@ -43,7 +44,8 @@ public class GiantAxe extends Axe {
      */
     @Override
     public WeaponAction getActiveSkill(Actor target, String direction) {
-        return  new SpinAttackAction( new GiantAxe(),target);
+        return  new SpinAttackAction( new GiantAxe());
+
     }
 
     /**
@@ -56,21 +58,24 @@ public class GiantAxe extends Axe {
      */
     @Override
     public List<Action> getAllowableActions() {
-        return super.getAllowableActions();
+        List<Action> actions= new ArrayList<>();
+
+            SpinAttackAction spinAttackAction= new SpinAttackAction(new GiantAxe());
+
+                actions.add(spinAttackAction);
+
+
+
+        return actions;
     }
 
-/**
-     * Accessor for damage done by this weapon.
+    /**
+     * Add a Capability to this Item.
      *
-     * @return the damage
+     * @param capability the Capability to add
      */
-//    @Override
-//    public int damage() {
-//        //if at adjacent angle(Spin Attack
-//        if(){
-//            int adjDamage=damage/2;
-//            return adjDamage;
-//        }
-//        return super.damage();
-//    }
+    @Override
+    public void addCapability(Enum<?> capability) {
+        super.addCapability(capability);
+    }
 }
