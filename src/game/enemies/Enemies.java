@@ -69,11 +69,11 @@ public abstract class Enemies extends Actor implements Resettable, Soul{
 			
 			// Add follow and attack behaviour to enemies
 			behaviours.add(0, new FollowBehaviour(otherActor));
-			behaviours.add(0, new AttackBehaviour(otherActor));
+			behaviours.add(0, new AttackBehaviour());
 			
 			// Allow enemies to use active skills randomly
 			if(!(this.getWeapon() instanceof IntrinsicWeapon) && !(this.hasCapability(Abilities.BOSS)))
-				behaviours.add(0, new RandomSkillBehaviour(otherActor));
+				behaviours.add(0, new RandomSkillBehaviour());
 		}
 		return actions;
 	}

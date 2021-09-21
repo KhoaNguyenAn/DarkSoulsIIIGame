@@ -2,6 +2,7 @@ package game;
 
 
 import edu.monash.fit2099.engine.*;
+import game.enums.Abilities;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -48,7 +49,7 @@ public class SpinAttackAction extends WeaponAction {
 
 
         int damage = weapon.damage()/2;
-        String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
+        String result = actor + " spin attacks at all directions" + " for " + damage + " damage.";
         Location bossLocation=map.locationOf(actor);
         ArrayList <Actor> targetList = new ArrayList<Actor>();
         for ( int x=bossLocation.x()-1 ;x<=bossLocation.x()+1;x++){
@@ -73,10 +74,12 @@ public class SpinAttackAction extends WeaponAction {
                 drop.execute(target, map);
             // remove actor
             //TODO: In A1 scenario, you must not remove a Player from the game yet. What to do, then?
-            map.removeActor(target);
+            if(!target.hasCapability(Abilities.PLAYER))
+            	map.removeActor(target);
             result += System.lineSeparator() + target + " is killed.";
+            return result;
         }
-
+        
         return result;
     }
 
