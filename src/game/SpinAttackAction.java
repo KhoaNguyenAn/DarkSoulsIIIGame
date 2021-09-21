@@ -32,9 +32,9 @@ public class SpinAttackAction extends WeaponAction {
      *
      * @param weaponItem the weapon item that has capabilities
      */
-    public SpinAttackAction(WeaponItem weaponItem , Actor target) {
+    public SpinAttackAction(WeaponItem weaponItem ) {
         super(weaponItem);
-        this.target=target;
+
     }
 
 
@@ -65,19 +65,21 @@ public class SpinAttackAction extends WeaponAction {
             targetList.get(i).hurt(damage);
         }
 
-        if (!target.isConscious()) {
-            Actions dropActions = new Actions();
-            // drop all items
-            for (Item item : target.getInventory())
-                dropActions.add(item.getDropAction(actor));
-            for (Action drop : dropActions)
-                drop.execute(target, map);
-            // remove actor
-            //TODO: In A1 scenario, you must not remove a Player from the game yet. What to do, then?
-            if(!target.hasCapability(Abilities.PLAYER))
-            	map.removeActor(target);
-            result += System.lineSeparator() + target + " is killed.";
-            return result;
+       for (int i=0;i<targetList.size();i++){
+            if (!targetList.get(i).isConscious()) {
+                Actions dropActions = new Actions();
+                // drop all items
+                for (Item item : targetList.get(i).getInventory())
+                    dropActions.add(item.getDropAction(actor));
+                for (Action drop : dropActions)
+                    drop.execute(targetList.get(i), map);
+                // remove actor
+                //TODO: In A1 scenario, you must not remove a Player from the game yet. What to do, then?
+                if (!targetList.get(i).hasCapability(Abilities.PLAYER))
+                    map.removeActor(targetList.get(i));
+                result += System.lineSeparator() + targetList.get(i) + " is killed.";
+                return result;
+            }
         }
         
         return result;
@@ -85,6 +87,6 @@ public class SpinAttackAction extends WeaponAction {
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " spin attacks " + target + " at all directions ";
+        return actor + " spin attacks everyone near him at all directions ";
     }
 }

@@ -1,17 +1,20 @@
 package game.Weapon;
 
 
-import edu.monash.fit2099.engine.Action;
-import edu.monash.fit2099.engine.Actor;
-import edu.monash.fit2099.engine.PickUpItemAction;
-import edu.monash.fit2099.engine.WeaponAction;
+import edu.monash.fit2099.engine.*;
 import game.ChargeAction;
 import game.SwapWeaponAction;
 import game.WindSlashAction;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import static game.enums.Abilities.CHARGE;
+
 public class StormRuler extends Sword {
+    private Object WindSlashAction;
+    private Object ChargeAction;
+
     /**
      * Constructor.
      *
@@ -64,21 +67,18 @@ public class StormRuler extends Sword {
      * @return null by default because a weapon doesn't have any active skill. Otherwise, return a WeaponAction instance.
 //     * @see WeaponItem#allowableActions for a self-direction skill instead of using this method (recommendation)
 //     */int charge=0;
+
     @Override
     public WeaponAction getActiveSkill(Actor target, String direction) {
-
-
         ChargeAction chargeAction=new ChargeAction(new StormRuler());
-        if (charge<3){
-            charge++;
-            return chargeAction;
 
-        } else {
-            charge=0;
+
+        if (chargeAction.getChargeCounter()==3){
+
             return new WindSlashAction(new StormRuler(), target);
         }
 
-
+return null;
     }
 
     /**
@@ -91,17 +91,52 @@ public class StormRuler extends Sword {
      */
     @Override
     public List<Action> getAllowableActions() {
-        return super.getAllowableActions();
+        List<Action> actions= new ArrayList<>();
+       if (hasCapability(CHARGE)){
+            ChargeAction chargeAction = new ChargeAction(new StormRuler());
+           if (chargeAction.getChargeCounter()<3){
+               actions.add(chargeAction);
+           }
+        }
+
+        return actions;
     }
     /**
      * Override getPickUpAction to allow swap the weapon
      */
     @Override
     public PickUpItemAction getPickUpAction(Actor actor) {
-		if(portable)
-			return new SwapWeaponAction(this);
+		if(portable) {
+		    addCapability(CHARGE);
+            return new SwapWeaponAction(this);
+        }
 		
 		return null;
 	}
+
+    /**
+     * Add a Capability to this Item.
+     *
+     * @param capability the Capability to add
+     */
+    /**
+     * Add a Capability to this Item.
+     *
+     * @param capability the Capability to add
+     */
+    @Override
+    public void addCapability(Enum<?> capability) {
+        super.addCapability(capability);
+    }
+
+    /**
+     * Casts this Item to a Weapon if possible.
+     *
+     * @return a reference to the current Item as type Weapon, or null if this Item isn't a Weapon
+     */
+    @Override
+    public Weapon asWeapon() {
+        return super.asWeapon();
+    }
 }
 

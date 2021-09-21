@@ -17,6 +17,14 @@ public class ChargeAction  extends WeaponAction {
          int chargeCounter=0;
     }
 
+    public int getChargeCounter() {
+        return chargeCounter;
+    }
+
+    public  void setChargeCounter(int chargeCounter) {
+        ChargeAction.chargeCounter = chargeCounter;
+    }
+
     /**
      * Perform the Action.
      *
