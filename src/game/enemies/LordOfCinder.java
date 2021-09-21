@@ -2,7 +2,6 @@ package game.enemies;
 
 import edu.monash.fit2099.engine.*;
 import game.AttackAction;
-import game.HeavySword;
 import game.StunAction;
 import game.Weapon.YhormsGiantMachete;
 import game.behaviours.AttackBehaviour;
@@ -30,7 +29,7 @@ public class LordOfCinder extends Enemies implements Resettable{
     public LordOfCinder(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints, 5000);
         this.addCapability(Abilities.BOSS);		// Used for some boss feature.
-        this.addItemToInventory(new YhormsGiantMachete());		//TODO: need Change to Yhorm’s Great Machete 
+        this.addItemToInventory(new YhormsGiantMachete());
     }
 
     /**
@@ -89,9 +88,9 @@ public class LordOfCinder extends Enemies implements Resettable{
 			}
 			
 			// Add follow, attack and unique behaviour to lord of cinder
-			behaviours.add(0, new FollowBehaviour(otherActor));
-			behaviours.add(0, new AttackBehaviour(otherActor));
-			behaviours.add(0, new UniqueBehaviour(otherActor, hitPoints, maxHitPoints));
+			behaviours.add(new FollowBehaviour(otherActor));
+			behaviours.add(0, new AttackBehaviour());
+			behaviours.add(0, new UniqueBehaviour(hitPoints, maxHitPoints));
 		}
 		return actions;
 	}

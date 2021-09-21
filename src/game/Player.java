@@ -58,7 +58,7 @@ public class Player extends Actor implements Soul, Resettable {
 		this.addCapability(Abilities.PLAYER); // Player will not be removed from map after dead.
 		this.addItemToInventory(new BroadSword());	  //
 		this.addItemToInventory(new EstusFlask(this.maxHitPoints));
-		this.souls = new SoulsManager(10000);	// Use SoulsManager to handle/store souls
+		this.souls = new SoulsManager(0);	// Use SoulsManager to handle/store souls
 		this.bonfireLocation = bonfire;
 		registerInstance();		// Register to reset list
 
