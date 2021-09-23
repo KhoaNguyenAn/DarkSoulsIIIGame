@@ -54,7 +54,7 @@ public class Application {
 			Location bonfire = gameMap.at(38,11);
 
 
-			Actor player = new Player("Unkindled (Player)", '@', 100000, bonfire);
+			Actor player = new Player("Unkindled (Player)", '@', 100, bonfire);
 			world.addPlayer(player, gameMap.at(38, 12));
 
 

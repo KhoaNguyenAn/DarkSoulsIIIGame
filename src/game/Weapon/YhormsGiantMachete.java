@@ -50,9 +50,11 @@ public class YhormsGiantMachete extends Axe {
     @Override
     public int chanceToHit() {
         if (actor.hasCapability(Status.EMBER_FORM)) {
-            int newChanceToHit= chanceToHit()+30;
-            return newChanceToHit;
+//            int newChanceToHit= chanceToHit()+30;
+//            return newChanceToHit;
+            return super.chanceToHit()+30;
         }
-        return super.chanceToHit();
+        else
+        	return super.chanceToHit();
     }
 }

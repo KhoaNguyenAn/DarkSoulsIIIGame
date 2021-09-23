@@ -61,11 +61,7 @@ public abstract class Enemies extends Actor implements Resettable, Soul{
 			
 			// Allow player to attack this enemy
 			actions.add(new AttackAction(this,direction));
-			
-			// Allow player to use weapon skill to this enemy if they had
-			if(!(otherActor.getWeapon() instanceof IntrinsicWeapon)) {
-				actions.add(otherActor.getWeapon().getActiveSkill(this, direction)); 
-			}
+
 			
 			// Add follow and attack behaviour to enemies
 			behaviours.add(0, new FollowBehaviour(otherActor));

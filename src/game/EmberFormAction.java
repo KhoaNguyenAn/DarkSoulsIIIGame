@@ -1,6 +1,7 @@
 package game;
 
 import edu.monash.fit2099.engine.*;
+import game.enums.Status;
 import game.terrains.BurningDirt;
 
 import java.util.Random;
@@ -30,7 +31,7 @@ public class EmberFormAction extends WeaponAction {
     @Override
     public String execute(Actor actor, GameMap map) {
         Weapon weapon = actor.getWeapon();
-
+        actor.addCapability(Status.EMBER_FORM);
 
 //        Location bossLocation = map.locationOf(actor);
 //
@@ -51,7 +52,7 @@ public class EmberFormAction extends WeaponAction {
                     }
 
             }
-        return null;
+        return menuDescription(actor);
         }
 
 
