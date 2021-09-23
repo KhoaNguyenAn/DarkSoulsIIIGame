@@ -29,7 +29,7 @@ public class BurningDirt extends Ground {
 
 
     public BurningDirt() {
-        super('H');
+        super('V');
 
     }
 }

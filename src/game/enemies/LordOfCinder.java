@@ -29,7 +29,7 @@ public class LordOfCinder extends Enemies implements Resettable{
     public LordOfCinder(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints, 5000);
         this.addCapability(Abilities.BOSS);		// Used for some boss feature.
-        this.addItemToInventory(new YhormsGiantMachete());
+        this.addItemToInventory(new YhormsGiantMachete(this));
     }
 
     /**

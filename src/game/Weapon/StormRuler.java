@@ -9,11 +9,13 @@ import game.WindSlashAction;
 import java.util.ArrayList;
 import java.util.List;
 
+import static game.enums.Abilities.BOSS;
 import static game.enums.Abilities.CHARGE;
 
 public class StormRuler extends Sword {
-    private Object WindSlashAction;
-    private Object ChargeAction;
+
+    private Actor target;
+    int chargeCount=0;
 
     /**
      * Constructor.
@@ -25,12 +27,12 @@ public class StormRuler extends Sword {
      * @param hitRate     the probability/chance to hit the target.
      */
     public StormRuler(String name, char displayChar, int damage, String verb, int hitRate,String swordPassiveSkill) {
-        super("StormRuler", '7', 50, "blow", 60, "critical strike, Dullness");
+        super("StormRuler", '7', 70, "blow", 60, "critical strike, Dullness");
 
     }
 
     public StormRuler() {
-        super("StormRuler", '7', 50, "blow", 60, "critical strike, Dullness");
+        super("StormRuler", '7', 70, "blow", 100, "critical strike, Dullness");
 
     }
     /**
@@ -41,8 +43,12 @@ public class StormRuler extends Sword {
     @Override
     public int damage() {
         int newDamage= criticalStrike();
+        if (target.hasCapability(BOSS)) {
         return newDamage;
-    }
+        }
+        else return newDamage/2;
+        }
+
 
 
     /**
@@ -70,11 +76,12 @@ public class StormRuler extends Sword {
 
     @Override
     public WeaponAction getActiveSkill(Actor target, String direction) {
+        this.target=target;
         ChargeAction chargeAction=new ChargeAction(new StormRuler());
 
 
         if (chargeAction.getChargeCounter()==3){
-
+            chargeAction.setChargeCounter(0);
             return new WindSlashAction(new StormRuler(), target);
         }
 
@@ -97,6 +104,7 @@ return null;
            if (chargeAction.getChargeCounter()<3){
                actions.add(chargeAction);
            }
+
         }
 
         return actions;

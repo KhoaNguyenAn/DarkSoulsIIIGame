@@ -3,6 +3,7 @@ package game;
 
 import edu.monash.fit2099.engine.*;
 import game.enums.Abilities;
+import game.enums.Status;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -50,20 +51,30 @@ public class SpinAttackAction extends WeaponAction {
 
         int damage = weapon.damage()/2;
         String result = actor + " spin attacks at all directions" + " for " + damage + " damage.";
-        Location bossLocation=map.locationOf(actor);
         ArrayList <Actor> targetList = new ArrayList<Actor>();
-        for ( int x=bossLocation.x()-1 ;x<=bossLocation.x()+1;x++){
-            for ( int y=bossLocation.y()-1;y<=bossLocation.y()+1;y++){
-                if (map.at(x,y).containsAnActor()){
-                   targetList.add(map.at(x,y).getActor());
-                }
-
+        // To get the target from adjacent
+        for (Exit exit : map.locationOf(actor).getExits()) {
+            Location destination = exit.getDestination();
+            if(destination.getActor() != null) {
+                   targetList.add( destination.getActor());
             }
         }
-        targetList.remove(actor);
-        for (int i=0; i<targetList.size();i++){
-            targetList.get(i).hurt(damage);
+
+        //player
+        if (actor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+            targetList.remove(actor);
+            for (int i = 0; i < targetList.size(); i++) {
+                targetList.get(i).hurt(damage);
+            }
         }
+        if (!actor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+            for (int i = 0; i < targetList.size(); i++) {
+                if (targetList.get(i).hasCapability(Status.HOSTILE_TO_ENEMY)) {
+                    targetList.get(i).hurt(damage);
+                }
+            }
+        }
+
 
        for (int i=0;i<targetList.size();i++){
             if (!targetList.get(i).isConscious()) {

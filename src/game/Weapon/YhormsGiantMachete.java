@@ -1,17 +1,45 @@
 package game.Weapon;
 
+import edu.monash.fit2099.engine.Actor;
+import edu.monash.fit2099.engine.WeaponAction;
+import game.EmberFormAction;
+import game.enums.Status;
+
 public class YhormsGiantMachete extends Axe {
+    private Actor actor;
     /**
      * Constructor.
      *
-     * @param name        name of the item
-     * @param displayChar character to use for display when item is on the ground
-     * @param damage      amount of damage this weapon does
-     * @param verb        verb to use for this weapon, e.g. "hits", "zaps"
-     * @param hitRate     the probability/chance to hit the target.
      */
-    public YhormsGiantMachete() {
+    public YhormsGiantMachete(Actor actor1) {
+
         super("YhormsGiantMachete", 'M', 95, "Beat", 60);
+        actor=actor1;
+    }
+
+
+    /**
+     * Get an action or skill from the weapon that will be used against one target.
+     * This method allows weapon instance to interact with Actor class.
+     * It can be used to have actionable special attack, heal, silence, etc. to a target
+     *
+     * @param target    the target actor
+     * @param direction the direction of target, e.g. "north"
+     * @return null by default because a weapon doesn't have any active skill. Otherwise, return a WeaponAction instance.
+     */
+    @Override
+    public WeaponAction getActiveSkill(Actor target, String direction) {
+        return new EmberFormAction(new YhormsGiantMachete(actor));
+    }
+
+    /**
+     * Add a Capability to this Item.
+     *
+     * @param capability the Capability to add
+     */
+    @Override
+    public void addCapability(Enum<?> capability) {
+        super.addCapability(capability);
     }
 
     /**
@@ -21,14 +49,10 @@ public class YhormsGiantMachete extends Axe {
      */
     @Override
     public int chanceToHit() {
-        int newHitRate= EmberForm(hitRate);
-        return newHitRate ;
+        if (actor.hasCapability(Status.EMBER_FORM)) {
+            int newChanceToHit= chanceToHit()+30;
+            return newChanceToHit;
+        }
+        return super.chanceToHit();
     }
-
-public int EmberForm(int hitRate){
-        if (true){
-            hitRate=hitRate+30;
-            return hitRate;
-        }return hitRate;
-}
 }

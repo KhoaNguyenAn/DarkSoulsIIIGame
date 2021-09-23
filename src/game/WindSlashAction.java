@@ -46,6 +46,10 @@ public class WindSlashAction extends WeaponAction {
         String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
         target.hurt(damage);
         target.addCapability(Status.STUNNED);
+
+
+
+
 //        DoNothingAction doNothingAction=new DoNothingAction();
 //        doNothingAction.execute(target,map);
         //Stun Target target.
