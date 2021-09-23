@@ -39,17 +39,10 @@ public class UniqueBehaviour implements Behaviour{
 		// If actor is not valid, return null
 		if(!map.contains(actor) || !actor.isConscious())
 			return null;
-		
-		// To get the target from adjacent
-		for (Exit exit : map.locationOf(actor).getExits()) {
-            Location destination = exit.getDestination();
-            if(destination.getActor() != null) {
-            	 if(destination.getActor().hasCapability(Status.HOSTILE_TO_ENEMY)) {
-            		 if((hitPoints < maxHitPoints/2))
-            				return actor.getWeapon().getActiveSkill(destination.getActor(), null);
-            			}
-            	 }
-            }
+		if(hitPoints < maxHitPoints/2 && !(actor.hasCapability(Status.EMBER_FORM))) {
+			System.out.println(actor + "is activates the ember form");
+			return actor.getWeapon().getActiveSkill(actor, null);
+		}
 		return null;
 	}
 }
