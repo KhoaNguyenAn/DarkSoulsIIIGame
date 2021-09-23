@@ -32,7 +32,7 @@ public class StormRuler extends Sword {
     }
 
     public StormRuler() {
-        super("StormRuler", '7', 70, "blow", 100, "critical strike, Dullness");
+        super("StormRuler", '7', 70, "blow", 60, "critical strike, Dullness");
 
     }
     /**
