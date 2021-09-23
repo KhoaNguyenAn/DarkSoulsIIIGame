@@ -67,12 +67,34 @@ public class AttackAction extends Action {
 					for (Action drop : dropActions)
 						drop.execute(target, map);
 					
+					result += System.lineSeparator() + target + " is killed.";
+
 					// If target is enemy, remove it and reward souls
 					if(!(target.hasCapability(Abilities.PLAYER))) {
 						map.removeActor(target);
 						target.asSoul().transferSouls(actor.asSoul()); 		// After defeat enemy, gain souls
 					}
-					result += System.lineSeparator() + target + " is killed.";
+					else {
+						result += System.lineSeparator() +"                                                                                                                               \n"
+								+ "                                                                                                                       dddddddd\n"
+								+ "YYYYYYY       YYYYYYY                                     DDDDDDDDDDDDD          iiii                                  d::::::d\n"
+								+ "Y:::::Y       Y:::::Y                                     D::::::::::::DDD      i::::i                                 d::::::d\n"
+								+ "Y:::::Y       Y:::::Y                                     D:::::::::::::::DD     iiii                                  d::::::d\n"
+								+ "Y::::::Y     Y::::::Y                                     DDD:::::DDDDD:::::D                                          d:::::d \n"
+								+ "YYY:::::Y   Y:::::YYYooooooooooo   uuuuuu    uuuuuu         D:::::D    D:::::D iiiiiii     eeeeeeeeeeee        ddddddddd:::::d \n"
+								+ "   Y:::::Y Y:::::Y oo:::::::::::oo u::::u    u::::u         D:::::D     D:::::Di:::::i   ee::::::::::::ee    dd::::::::::::::d \n"
+								+ "    Y:::::Y:::::Y o:::::::::::::::ou::::u    u::::u         D:::::D     D:::::D i::::i  e::::::eeeee:::::ee d::::::::::::::::d \n"
+								+ "     Y:::::::::Y  o:::::ooooo:::::ou::::u    u::::u         D:::::D     D:::::D i::::i e::::::e     e:::::ed:::::::ddddd:::::d \n"
+								+ "      Y:::::::Y   o::::o     o::::ou::::u    u::::u         D:::::D     D:::::D i::::i e:::::::eeeee::::::ed::::::d    d:::::d \n"
+								+ "       Y:::::Y    o::::o     o::::ou::::u    u::::u         D:::::D     D:::::D i::::i e:::::::::::::::::e d:::::d     d:::::d \n"
+								+ "       Y:::::Y    o::::o     o::::ou::::u    u::::u         D:::::D     D:::::D i::::i e::::::eeeeeeeeeee  d:::::d     d:::::d \n"
+								+ "       Y:::::Y    o::::o     o::::ou:::::uuuu:::::u         D:::::D    D:::::D  i::::i e:::::::e           d:::::d     d:::::d \n"
+								+ "       Y:::::Y    o:::::ooooo:::::ou:::::::::::::::uu     DDD:::::DDDDD:::::D  i::::::ie::::::::e          d::::::ddddd::::::dd\n"
+								+ "    YYYY:::::YYYY o:::::::::::::::o u:::::::::::::::u     D:::::::::::::::DD   i::::::i e::::::::eeeeeeee   d:::::::::::::::::d\n"
+								+ "    Y:::::::::::Y  oo:::::::::::oo   uu::::::::uu:::u     D::::::::::::DDD     i::::::i  ee:::::::::::::e    d:::::::::ddd::::d\n"
+								+ "    YYYYYYYYYYYYY    ooooooooooo       uuuuuuuu  uuuu     DDDDDDDDDDDDD        iiiiiiii    eeeeeeeeeeeeee     ddddddddd   ddddd\n"
+								+ "                                                                                                                               ";
+					}
 				}
 				else {
 					// If target has abilities to revive, give it extra turn to revive.
@@ -98,7 +120,7 @@ public class AttackAction extends Action {
 			// Treat boss separately so that it can display message.
 			else {
 				result += System.lineSeparator() + target + " is killed.";
-				System.out.println("                                                                                                                                                                                                                                                                                                                                                                                                            \n"
+				result += System.lineSeparator() +"                                                                                                                                                                                                                                                                                                                                                                                                            \n"
 	        			+ "                                                                                                                                                                                                                                                                                                                                                                                                            \n"
 	        			+ "LLLLLLLLLLL                  OOOOOOOOO     RRRRRRRRRRRRRRRRR   DDDDDDDDDDDDD                  OOOOOOOOO     FFFFFFFFFFFFFFFFFFFFFF             CCCCCCCCCCCCCIIIIIIIIIINNNNNNNN        NNNNNNNNDDDDDDDDDDDDD      EEEEEEEEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRR        FFFFFFFFFFFFFFFFFFFFFF      AAA               LLLLLLLLLLL             LLLLLLLLLLL             EEEEEEEEEEEEEEEEEEEEEENNNNNNNN        NNNNNNNN\n"
 	        			+ "L:::::::::L                OO:::::::::OO   R::::::::::::::::R  D::::::::::::DDD             OO:::::::::OO   F::::::::::::::::::::F          CCC::::::::::::CI::::::::IN:::::::N       N::::::ND::::::::::::DDD   E::::::::::::::::::::ER::::::::::::::::R       F::::::::::::::::::::F     A:::A              L:::::::::L             L:::::::::L             E::::::::::::::::::::EN:::::::N       N::::::N\n"
@@ -118,7 +140,7 @@ public class AttackAction extends Action {
 	        			+ "LLLLLLLLLLLLLLLLLLLLLLLL     OOOOOOOOO     RRRRRRRR     RRRRRRRDDDDDDDDDDDDD                  OOOOOOOOO     FFFFFFFFFFF                        CCCCCCCCCCCCCIIIIIIIIIINNNNNNNN         NNNNNNNDDDDDDDDDDDDD      EEEEEEEEEEEEEEEEEEEEEERRRRRRRR     RRRRRRR     FFFFFFFFFFF  AAAAAAA                   AAAAAAALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLEEEEEEEEEEEEEEEEEEEEEENNNNNNNN         NNNNNNN\n"
 	        			+ "                                                                                                                                                                                                                                                                                                                                                                                                            \n"
 	        			+ "                                                                                                                                                                                                                                                                                                                                                                                                            \n"
-	        			+ "");
+	        			+ "";
 	        map.locationOf(target).addItem(new PortableItem("Cinders of a Lord", '%'));
 	        map.removeActor(target);
 	        target.asSoul().transferSouls(actor.asSoul()); 		// After defeat enemy, gain souls

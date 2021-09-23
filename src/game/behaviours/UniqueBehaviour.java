@@ -40,7 +40,6 @@ public class UniqueBehaviour implements Behaviour{
 		if(!map.contains(actor) || !actor.isConscious())
 			return null;
 		if(hitPoints < maxHitPoints/2 && !(actor.hasCapability(Status.EMBER_FORM))) {
-			System.out.println(actor + "is activates the ember form");
 			return actor.getWeapon().getActiveSkill(actor, null);
 		}
 		return null;

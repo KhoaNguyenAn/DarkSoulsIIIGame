@@ -65,6 +65,6 @@ public class EmberFormAction extends WeaponAction {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return "Player gets burned for 25 damage";
+        return actor + "is activates the ember form";
     }
 }
