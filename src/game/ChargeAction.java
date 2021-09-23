@@ -39,6 +39,7 @@ public class ChargeAction  extends WeaponAction {
         if (ChargeAction.chargeCounter==3){
 
             return "Charge 3/3 Finish!";
+
         }else {
 
             return "StormRuler Charged"+ChargeAction.chargeCounter+"/3";
