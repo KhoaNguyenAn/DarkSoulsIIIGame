@@ -1,10 +1,9 @@
 package game;
 
-import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 
-public class IncreaseMaxHpAction extends Action{
+public class IncreaseMaxHpAction extends BuyItemAction{
 	public IncreaseMaxHpAction(){
 		
 	}
