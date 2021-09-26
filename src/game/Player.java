@@ -192,9 +192,7 @@ public class Player extends Actor implements Soul, Resettable {
 		}
 	}
 
-
 	public Location getBonfireLocation() {
 		return this.bonfireLocation;
 	}
-
 }
