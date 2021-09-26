@@ -2,7 +2,6 @@ package game;
 
 import edu.monash.fit2099.engine.*;
 import game.enums.Abilities;
-import game.IncreaseMaxHpAction;
 public class Vendor extends Actor {
 
 
@@ -50,7 +49,7 @@ public class Vendor extends Actor {
         if (otherActor.hasCapability(Abilities.BUY_ITEMS)) {
 
 
-            // Add follow and attack behaviour to enemies
+            // Add actions for buying items when close to it
             actions.add(new BuyBroadswordAction());
             actions.add(new BuyGiantAxeAction());
             actions.add(new IncreaseMaxHpAction());

@@ -17,11 +17,11 @@ public class BuyBroadswordAction extends BuyItemAction{
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor +"purchase the Broad Sword" ;
+        return actor +"purchases the Broad Sword" ;
     }
 
     /**
-     * Perform the Action.
+     * Perform the Action.Give player the weapon when the transaction is successful
      *
      * @param actor The actor performing the action.
      * @param map   The map the actor is on.

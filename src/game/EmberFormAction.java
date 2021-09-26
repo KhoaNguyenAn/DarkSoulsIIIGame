@@ -28,20 +28,18 @@ public class EmberFormAction extends WeaponAction {
     }
 
 
+    /**
+     * Perform the Action.
+     *
+     * @param actor The actor performing the action.
+     * @param map   The map the actor is on.
+     * @return a description of what happened that can be displayed to the user.
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         Weapon weapon = actor.getWeapon();
         actor.addCapability(Status.EMBER_FORM);
 
-//        Location bossLocation = map.locationOf(actor);
-//
-//        for (int x = bossLocation.x() - 1; x <= bossLocation.x() + 1; x++) {
-//            for (int y = bossLocation.y() - 1; y <= bossLocation.y() + 1; y++) {
-//                if (map.at(x, y).getGround().getDisplayChar() == '.') {
-//                    map.at(x, y).setGround(new BurningDirt());
-//                }
-//            }
-//        }
 
         // To get the target from adjacent
         for (Exit exit : map.locationOf(actor).getExits()) {
