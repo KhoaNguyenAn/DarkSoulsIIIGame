@@ -5,14 +5,23 @@ import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Location;
 import edu.monash.fit2099.engine.Actions;
 import game.Rest;
+/**
+ *  Public Bonfire Class - Extends from Ground
+ */
 public class Bonfire extends Ground {
 
 
-    public Bonfire() {
+    /**
+	 *  Letter "B" is the Bonfire
+	 */
+	public Bonfire() {
         super('B');
     }
 
-    @Override
+    /**
+	 * Method to allow Player to enter
+	 */
+	@Override
 	public boolean canActorEnter(Actor actor){
 		return true;
 	}
