@@ -11,7 +11,7 @@ public class BuyItemAction extends Action  implements Soul {
     }
 
     /**
-     * Perform the Action.
+     * Perform the Action.Give player the weapon when the transaction is successful
      *
      * @param actor The actor performing the action.
      * @param map   The map the actor is on.

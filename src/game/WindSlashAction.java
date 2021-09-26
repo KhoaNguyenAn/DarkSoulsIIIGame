@@ -30,30 +30,29 @@ public class WindSlashAction extends WeaponAction {
      *
      * @param target the Actor to attack
      */
-    public WindSlashAction(WeaponItem weaponItem , Actor target) {
+    public WindSlashAction(WeaponItem weaponItem, Actor target) {
         super(weaponItem);
-        this.target=target;
+        this.target = target;
     }
 
-
+    /**
+     * Perform the Action.
+     *
+     * @param actor The actor performing the action.
+     * @param map   The map the actor is on.
+     * @return a description of what happened that can be displayed to the user.
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
 
         Weapon weapon = actor.getWeapon();
 
 
-        int damage = weapon.damage()*2;
+        int damage = weapon.damage() * 2;
         String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
         target.hurt(damage);
         target.addCapability(Status.STUNNED);
 
-
-
-
-//        DoNothingAction doNothingAction=new DoNothingAction();
-//        doNothingAction.execute(target,map);
-        //Stun Target target.
-//        actor.playTurn()
         if (!target.isConscious()) {
             Actions dropActions = new Actions();
             // drop all items
@@ -61,8 +60,6 @@ public class WindSlashAction extends WeaponAction {
                 dropActions.add(item.getDropAction(actor));
             for (Action drop : dropActions)
                 drop.execute(target, map);
-            // remove actor
-            //TODO: In A1 scenario, you must not remove a Player from the game yet. What to do, then?
             map.removeActor(target);
             result += System.lineSeparator() + target + " is killed.";
         }
@@ -72,6 +69,6 @@ public class WindSlashAction extends WeaponAction {
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " wind slashes " + target ;
+        return actor + " wind slashes " + target;
     }
 }
