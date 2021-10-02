@@ -4,6 +4,9 @@ import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Actor;
 
+/**
+ * Rest - A action that allow user to reset
+ */
 public class Rest extends Action {
 
     public void Rest(){
