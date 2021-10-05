@@ -71,8 +71,15 @@ public class AttackAction extends Action {
 
 					// If target is enemy, remove it and reward souls
 					if(!(target.hasCapability(Abilities.PLAYER))) {
-						map.removeActor(target);
 						target.asSoul().transferSouls(actor.asSoul()); 		// After defeat enemy, gain souls
+						// If it is mimic, place the token of souls
+						if(target.hasCapability(Abilities.DROP_SOULS)) {
+							int counter = rand.nextInt(3);
+							for(int i=0; i <= counter; i++) {
+								map.locationOf(target).addItem(new TokenOfSoul(100));
+							}
+						}
+						map.removeActor(target);
 					}
 					else {
 						result += System.lineSeparator() +"                                                                                                                               \n"
