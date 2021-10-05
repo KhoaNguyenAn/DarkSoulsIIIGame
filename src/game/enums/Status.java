@@ -11,7 +11,7 @@ public enum Status {
     ACTIVE,		// use this status to display active message for boss
     STUNNED,
     EMBER_FORM,
-
+    OPENED		// the status to illustrate if the chest is opened or not
 }
 
 
