@@ -148,12 +148,28 @@ public class AttackAction extends Action {
 	        			+ "                                                                                                                                                                                                                                                                                                                                                                                                            \n"
 	        			+ "                                                                                                                                                                                                                                                                                                                                                                                                            \n"
 	        			+ "";
-	        map.locationOf(target).addItem(new PortableItem("Cinders of a Lord", '%'));
+			
+	        dropCinder(target, map);	// After defeat boss, drop the cinder
 	        map.removeActor(target);
 	        target.asSoul().transferSouls(actor.asSoul()); 		// After defeat enemy, gain souls
 			}
 		}
 		return result;
+	}
+	/**
+	 * The method to handle drop cinder of lord after boss is defeated
+	 * @param actor the actor that been defeated
+	 * @param map the game map
+	 */
+	public void dropCinder(Actor actor, GameMap map) {
+		String targetName;
+		if(target.getDisplayChar() == 'Y')
+			targetName = "Yhorm the Giant";
+		else if(target.getDisplayChar() == 'A')
+			targetName = "Aldrich the Devourer";
+		else
+			targetName = "ERROR";
+		map.locationOf(target).addItem(new PortableItem(targetName + "'s Cinders of a Lord", '%'));
 	}
 
 	@Override
