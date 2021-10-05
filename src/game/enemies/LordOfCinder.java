@@ -3,7 +3,6 @@ package game.enemies;
 import edu.monash.fit2099.engine.*;
 import game.AttackAction;
 import game.StunAction;
-import game.Weapon.YhormsGiantMachete;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.UniqueBehaviour;
@@ -29,7 +28,7 @@ public class LordOfCinder extends Enemies implements Resettable{
     public LordOfCinder(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints, 5000);
         this.addCapability(Abilities.BOSS);		// Used for some boss feature.
-        this.addItemToInventory(new YhormsGiantMachete(this));
+//        this.addItemToInventory(new YhormsGiantMachete(this));
     }
 
     /**
@@ -94,4 +93,11 @@ public class LordOfCinder extends Enemies implements Resettable{
 		}
 		return actions;
 	}
+    /**
+     * Method to get the name of boss, to produce different cinder of lord
+     * @return String, the name of Lord of Cinder
+     */
+    public String getName() {
+    	return super.name;
+    }
 }
