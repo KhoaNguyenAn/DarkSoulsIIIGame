@@ -19,7 +19,7 @@ import game.interfaces.Resettable;
  * TODO: Could it be an abstract class? If so, why and how? (Answered in design rationale)
  * LordOfCinder represents a lord of cinder (boss)
  */
-public class LordOfCinder extends Enemies implements Resettable{
+public abstract class LordOfCinder extends Enemies implements Resettable{
 	/**
 	 * Location is used to store the initial position of load of cinder
 	 */
@@ -30,7 +30,6 @@ public class LordOfCinder extends Enemies implements Resettable{
     public LordOfCinder(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints, 5000);
         this.addCapability(Abilities.BOSS);		// Used for some boss feature.
-//        this.addItemToInventory(new YhormsGiantMachete(this));
     }
 
     /**
@@ -50,8 +49,8 @@ public class LordOfCinder extends Enemies implements Resettable{
     	// Add location of Lord of cinder
     	if (location == null)
 			location = map.locationOf(this);
-    	// If stunned, do nothing and shows the stunned status
-    	if(this.hasCapability(Status.STUNNED)) {
+    	// If stunned, do nothing and shows the stunned status, only used for Yhorm the gaint
+    	if(this.hasCapability(Status.STUNNED) && this.hasCapability(Abilities.YHORM)) {
     		this.removeCapability(Status.STUNNED);
     		return new StunAction();
     	}
