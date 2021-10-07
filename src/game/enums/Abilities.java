@@ -13,5 +13,4 @@ public enum Abilities {
     REVIVE, // To revive skeleton or player
     BOSS,	// To display messages after BOSS dead, distinguish it from enemies
     PLAYER, // To display messages after player dead
-    DROP_SOULS // To drop souls ability of mimic 
 }

@@ -43,6 +43,8 @@ public class StormRuler extends Sword {
     @Override
     public int damage() {
         int newDamage= criticalStrike();
+        if(target == null)
+        	return newDamage/2;
         if (target.hasCapability(BOSS)) {
         return newDamage;
         }
