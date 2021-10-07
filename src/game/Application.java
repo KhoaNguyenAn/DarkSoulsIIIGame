@@ -68,7 +68,6 @@ public class Application {
 			gameMap.at(6, 25).addActor(yhorm);	
 			gameMap.at(38, 9).addActor(aldrich);	//TODO: Need to placed on the second map with certain terrains around
 			gameMap.at(7, 25).addItem(new StormRuler());
-			
 			// FIXED: the Undead will be generated from the Cemetery
 			
 			// Place several Skeletons in the map

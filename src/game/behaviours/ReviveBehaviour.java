@@ -5,6 +5,7 @@ import java.util.Random;
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
+import game.KilledAction;
 import game.enums.Abilities;
 import game.interfaces.Behaviour;
 /**
@@ -30,6 +31,10 @@ public class ReviveBehaviour extends Action implements Behaviour{
 				actor.heal(Integer.MAX_VALUE);
 				actor.removeCapability(Abilities.REVIVE);
 				return this;
+			}
+			else {
+				map.removeActor(actor);
+				return new KilledAction();
 			}
 		}
 		return null;

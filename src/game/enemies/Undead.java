@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.DoNothingAction;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.IntrinsicWeapon;
+import game.KilledAction;
 import game.behaviours.InstantDieBehaviour;
 import game.behaviours.WanderBehaviour;
 import game.enums.Status;
@@ -37,7 +38,12 @@ public class Undead extends Enemies implements Resettable{
 		// If soft reset is triggered, remove all the undead from map
 		if(this.hasCapability(Status.SOFTRESET)) {
 			map.removeActor(this);
-			return new DoNothingAction();
+			return new KilledAction();
+		}
+		// If this enemy is dead, remove it from map
+		if(!this.isConscious()) {
+			map.removeActor(this);
+			return new KilledAction();
 		}
 		for(Behaviour Behaviour : behaviours) {
 			Action action = Behaviour.getAction(this, map);

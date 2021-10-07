@@ -1,6 +1,7 @@
 package game.enemies;
 
 import edu.monash.fit2099.engine.*;
+import game.KilledAction;
 import game.Weapon.BroadSword;
 import game.Weapon.GiantAxe;
 import game.behaviours.FollowBehaviour;
@@ -42,6 +43,10 @@ public class Skeleton extends Enemies implements Resettable{
 	 */
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
+		if(!this.isConscious() && !this.hasCapability(Abilities.REVIVE)) {
+			map.removeActor(this);
+			return new KilledAction();
+		}
 		// Add location of skeleton
 		if (location == null)
 				location = map.locationOf(this);
@@ -69,7 +74,6 @@ public class Skeleton extends Enemies implements Resettable{
 	}
 	/**
 	 * A method that allow skeleton to hold random weapons
-	 * TODO: Need modified to broad sword and giant axe later
 	 */
 	private void randomWeapon() {
 		if(random.nextInt(100)<50)
