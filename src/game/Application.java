@@ -2,11 +2,10 @@ package game;
 
 
 import edu.monash.fit2099.engine.*;
-import game.Weapon.BroadSword;
 import game.Weapon.StormRuler;
-import game.Weapon.YhormsGiantMachete;
-import game.enemies.LordOfCinder;
+import game.enemies.AldrichTheDevourer;
 import game.enemies.Skeleton;
+import game.enemies.YhormTheGiant;
 import game.terrains.*;
 
 import java.util.Arrays;
@@ -58,15 +57,10 @@ public class Application {
 			Actor player = new Player("Unkindled (Player)", '@', 1000000, bonfire);	//TODO: Need to fixed after test
 			world.addPlayer(player, gameMap.at(38, 12));
 
-			// Place Yhorm the Giant/boss in the map
-			LordOfCinder yhorm = new LordOfCinder("Yhorm the Giant", 'Y', 500);
-			LordOfCinder aldrich = new LordOfCinder("Aldrich the Devourer", 'A', 350);
-			
-			yhorm.addItemToInventory(new YhormsGiantMachete(yhorm));
-			aldrich.addItemToInventory(new BroadSword());	//TODO: Need to be replaced with DarkmoonLongbow
-			
-			gameMap.at(6, 25).addActor(yhorm);	
-			gameMap.at(38, 9).addActor(aldrich);	//TODO: Need to placed on the second map with certain terrains around
+			// Place bosses/weapon in the map
+		
+			gameMap.at(6, 25).addActor(new YhormTheGiant());	
+			gameMap.at(38, 9).addActor(new AldrichTheDevourer());	//TODO: Need to placed on the second map with certain terrains around
 			gameMap.at(7, 25).addItem(new StormRuler());
 			// FIXED: the Undead will be generated from the Cemetery
 			
