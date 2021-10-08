@@ -1,12 +1,12 @@
 package game.behaviours;
 
-import java.util.Random;
-
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 import game.enums.Abilities;
 import game.interfaces.Behaviour;
+
+import java.util.Random;
 /**
  * Class representing revive behaviour
  * @author Dongzheng Wu
