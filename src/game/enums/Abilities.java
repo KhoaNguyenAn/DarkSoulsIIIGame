@@ -11,7 +11,7 @@ public enum Abilities {
     FALL,   // To fall from valley
     ENTER,  // To enter the floor
     REVIVE, // To revive skeleton or player
-    BOSS,	// To display messages after BOSS dead, distinguish it from enemies
+    BOSS,	// To distinguish it from normal enemies
+    YHORM,	// To achieve unique feature
     PLAYER, // To display messages after player dead
-
 }

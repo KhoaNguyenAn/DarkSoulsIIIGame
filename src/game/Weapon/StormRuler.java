@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.*;
 import game.ChargeAction;
 import game.SwapWeaponAction;
 import game.WindSlashAction;
+import game.enums.Abilities;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +44,9 @@ public class StormRuler extends Sword {
     @Override
     public int damage() {
         int newDamage= criticalStrike();
-        if (target.hasCapability(BOSS)) {
+        if(target == null)
+        	return newDamage/2;
+        if (target.hasCapability(Abilities.YHORM)) {
         return newDamage;
         }
         else return newDamage/2;

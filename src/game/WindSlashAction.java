@@ -1,7 +1,9 @@
 package game;
 
 import edu.monash.fit2099.engine.*;
+import game.enums.Abilities;
 import game.enums.Status;
+import game.interfaces.Soul;
 
 import java.util.Random;
 
@@ -55,16 +57,37 @@ public class WindSlashAction extends WeaponAction {
         target.hurt(damage);
         target.addCapability(Status.STUNNED);
 
-        if (!target.isConscious()) {
-            Actions dropActions = new Actions();
-            // drop all items
-            for (Item item : target.getInventory())
-                dropActions.add(item.getDropAction(actor));
-            for (Action drop : dropActions)
-                drop.execute(target, map);
-            map.removeActor(target);
-            result += System.lineSeparator() + target + " is killed.";
-        }
+        if (!target.isConscious()){
+			Actions dropActions = new Actions();
+				// Check if the target has revive ability or not.
+				if(!(target.hasCapability(Abilities.REVIVE))) {
+					// In our design, we allow player to drop all the items after dead
+					if(target.hasCapability(Abilities.PLAYER)) {
+						for (Item item : target.getInventory())
+							dropActions.add(item.getDropAction(actor));
+						for (Action drop : dropActions)
+							drop.execute(target, map);
+					}
+					// If target is enemy reward souls
+					if(!(target.hasCapability(Abilities.PLAYER))) {
+						target.asSoul().transferSouls(actor.asSoul()); 		// After defeat enemy, gain souls
+					}
+				}
+				else {
+					// If target has abilities to revive, give it extra turn to revive.
+					if(target.hasCapability(Abilities.REVIVE)){
+						Soul souls = target.asSoul();
+						target.playTurn(null, getNextAction(), map, null);
+						// If didn't revive, drop the items, remove it and reward souls.
+						if(!target.isConscious()) {
+							souls.transferSouls(actor.asSoul());
+							result += System.lineSeparator() + target + " is killed !";
+						}
+						else
+							result += System.lineSeparator() + target + " is revived !";
+					}
+				}
+		}
 
         return result;
     }

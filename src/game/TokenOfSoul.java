@@ -15,7 +15,7 @@ public class TokenOfSoul extends Item implements Soul, Resettable{
 	 */
 	private SoulsManager souls;
 	/**
-	 * Constructor
+	 * Constructor of TokenOfSoul with empty souls
 	 */
 	public TokenOfSoul() {
 		// Token of soul cannot be placed in inventor or dropped, so it is improbable.
@@ -24,6 +24,19 @@ public class TokenOfSoul extends Item implements Soul, Resettable{
 		allowableActions.add(new PickUpSoulAction(this));
 		souls = new SoulsManager();
 		registerInstance();		// It can be reset after player died
+	}
+	/**
+	 * Constructor of TokenOfSoul with certain souls
+	 * @param soul  integer of number of souls in Token of Souls
+	 */
+	public TokenOfSoul(int soul) {
+		// Token of soul cannot be placed in inventor or dropped, so it is improbable.
+		super("Token of Souls", '$', false);
+		// Add action allow player pick it and gain souls
+		allowableActions.add(new PickUpSoulAction(this));
+		souls = new SoulsManager();
+		registerInstance();		// It can be reset after player died
+		this.souls.add(soul);
 	}
 	/**
 	 * Override transferSouls so it can give player the souls
