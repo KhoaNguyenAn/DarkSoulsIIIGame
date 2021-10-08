@@ -1,10 +1,15 @@
 package game;
 
-import edu.monash.fit2099.engine.*;
+import java.util.Random;
+
+import edu.monash.fit2099.engine.Action;
+import edu.monash.fit2099.engine.Actions;
+import edu.monash.fit2099.engine.Actor;
+import edu.monash.fit2099.engine.GameMap;
+import edu.monash.fit2099.engine.Item;
+import edu.monash.fit2099.engine.Weapon;
 import game.enums.Abilities;
 import game.interfaces.Soul;
-
-import java.util.Random;
 
 /**
  * Special Action for attacking other Actors.
@@ -35,8 +40,6 @@ public class AttackAction extends Action {
 		this.target = target;
 		this.direction = direction;
 	}
-
-
 
 	@Override
 	public String execute(Actor actor, GameMap map) {
