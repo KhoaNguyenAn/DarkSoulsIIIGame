@@ -32,9 +32,11 @@ public class WindSlashAction extends WeaponAction {
      *
      * @param target the Actor to attack
      */
-    public WindSlashAction(WeaponItem weaponItem, Actor target) {
+    public WindSlashAction( WeaponItem weaponItem,Actor target) {
         super(weaponItem);
-        this.target = target;
+        this.target=target;
+
+
     }
 
     /**
