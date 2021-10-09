@@ -1,10 +1,13 @@
-package game;
+package game.TradeAction;
 
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
-import game.Weapon.BroadSword;
+import edu.monash.fit2099.engine.Item;
+import game.BuyItemAction;
+import game.SwapWeaponAction;
+import game.Weapon.YhormsGiantMachete;
 
-public class TradeGiantBossAction extends BuyItemAction{
+public class TradeGiantBossAction extends BuyItemAction {
     public TradeGiantBossAction() {
 
     }
@@ -32,15 +35,15 @@ public class TradeGiantBossAction extends BuyItemAction{
     public String execute(Actor actor, GameMap map) {
 
         for (Item item : actor.getInventory()) {
-            if (item.name=="Cinder of a Lord"){
-                actor.remove(item);
-                YhormsGiantMachete yhormsGiantMachete=new YhormsGiantMachete();
-                SwapWeaponAction swapWeaponAction=new SwapWeaponAction(yhormsGiantMachete);
+            if (item.toString() == "Cinder of a Lord") {
+                actor.getInventory().remove(item);
+                YhormsGiantMachete yhormsGiantMachete = new YhormsGiantMachete();
+                SwapWeaponAction swapWeaponAction = new SwapWeaponAction(yhormsGiantMachete);
                 swapWeaponAction.execute(actor, map);
                 return "Traded Yhorm the Giant Lord of Cinder";
             }
-            return "Kill the Boss first Bro";
-        }
 
+        }
+        return "Kill the Boss first Bro";
     }
 }

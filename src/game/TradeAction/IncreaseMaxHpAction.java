@@ -1,13 +1,14 @@
-package game;
+package game.TradeAction;
 
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 
-public class IncreaseMaxHpAction extends BuyItemAction{
-	public IncreaseMaxHpAction(){
-		
-	}
-	/**
+public class IncreaseMaxHpAction extends game.BuyItemAction {
+    public IncreaseMaxHpAction() {
+
+    }
+
+    /**
      * Perform the Action.
      *
      * @param actor The actor performing the action.

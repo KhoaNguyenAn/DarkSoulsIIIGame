@@ -2,10 +2,10 @@ package game;
 
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
-import game.Weapon.GiantAxe;
+import game.Weapon.BroadSword;
 
-public class BuyGiantAxeAction extends BuyItemAction{
-    public BuyGiantAxeAction() {
+public class BuyBroadswordAction extends game.BuyItemAction {
+    public BuyBroadswordAction() {
 
     }
 
@@ -17,7 +17,7 @@ public class BuyGiantAxeAction extends BuyItemAction{
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor +"purchases the Giant Axe";
+        return actor +"purchases the Broad Sword" ;
     }
 
     /**
@@ -29,12 +29,12 @@ public class BuyGiantAxeAction extends BuyItemAction{
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        if(actor.asSoul().subtractSouls(1000)==true){
-            GiantAxe giantAxe=new GiantAxe();
-            SwapWeaponAction swapWeaponAction=new SwapWeaponAction(giantAxe);
+        if(actor.asSoul().subtractSouls(500)== true){
+            BroadSword broadSword=new BroadSword();
+            SwapWeaponAction swapWeaponAction=new SwapWeaponAction(broadSword);
              swapWeaponAction.execute(actor, map);
-        return "Purchased Giant Axe";
+            return "Purchased BroadSword";
         }
-        return "Purchase Failed";
+        return "Purchased Failed";
     }
 }
