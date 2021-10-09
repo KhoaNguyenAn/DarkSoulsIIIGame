@@ -7,14 +7,21 @@ import game.enums.Status;
 
 public class YhormsGiantMachete extends Axe {
     private Actor actor;
+
     /**
      * Constructor.
-     *
      */
     public YhormsGiantMachete(Actor actor1) {
 
         super("YhormsGiantMachete", 'M', 95, "Beat", 60);
-        actor=actor1;
+        actor = actor1;
+    }
+
+
+    public YhormsGiantMachete() {
+
+        super("YhormsGiantMachete", 'M', 95, "Beat", 60);
+
     }
 
 

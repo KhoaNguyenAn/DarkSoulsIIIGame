@@ -1,6 +1,7 @@
 package game;
 
 import edu.monash.fit2099.engine.*;
+import game.TradeAction.IncreaseMaxHpAction;
 import game.enums.Abilities;
 public class Vendor extends Actor {
 
@@ -50,10 +51,9 @@ public class Vendor extends Actor {
 
 
             // Add actions for buying items when close to it
-            actions.add(new BuyBroadswordAction());
-            actions.add(new BuyGiantAxeAction());
+            actions.add(new game.BuyBroadswordAction());
+            actions.add(new game.BuyGiantAxeAction());
             actions.add(new IncreaseMaxHpAction());
-
 
 
         }

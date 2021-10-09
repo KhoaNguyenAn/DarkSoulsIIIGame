@@ -1,10 +1,13 @@
-package game;
+package game.TradeAction;
 
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
-import game.Weapon.BroadSword;
+import edu.monash.fit2099.engine.Item;
+import game.BuyItemAction;
+import game.SwapWeaponAction;
+import game.Weapon.DarkmoonLongbow;
 
-public class TradeDevourerBossAction extends BuyItemAction{
+public class TradeDevourerBossAction extends BuyItemAction {
     public TradeDevourerBossAction() {
 
     }
@@ -32,15 +35,15 @@ public class TradeDevourerBossAction extends BuyItemAction{
     public String execute(Actor actor, GameMap map) {
 
         for (Item item : actor.getInventory()) {
-            if (item.name=="Devourer Cinder of a Lord"){
-                actor.remove(item);
-                DarkmoonLongbow darkmoonLongbow=new DarkmoonLongbow();
-                SwapWeaponAction swapWeaponAction=new SwapWeaponAction(darkmoonLongbow);
+            if (item.toString() == "Devourer Cinder of a Lord") {
+                actor.getInventory().remove(item);
+                DarkmoonLongbow darkmoonLongbow = new DarkmoonLongbow();
+                SwapWeaponAction swapWeaponAction = new SwapWeaponAction(darkmoonLongbow);
                 swapWeaponAction.execute(actor, map);
                 return "Traded Yhorm the Giant Lord of Cinder";
             }
-            return "Kill the Boss first Bro";
-        }
 
+        }
+        return "Kill the Boss first Bro";
     }
 }
