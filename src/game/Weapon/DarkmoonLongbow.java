@@ -1,8 +1,11 @@
 package game.Weapon;
 
 
-import edu.monash.fit2099.engine.*;
-import game.AttackAction;
+import edu.monash.fit2099.engine.Action;
+import edu.monash.fit2099.engine.Actor;
+import edu.monash.fit2099.engine.GameMap;
+import edu.monash.fit2099.engine.Location;
+import game.RangeAttack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,21 +59,38 @@ public class DarkmoonLongbow extends Bow {
     	actor.addCapability(RANGE_ATTACK);
         int X = currentLocation.x() - 3;
         int Y = currentLocation.y() - 3;
+        GameMap map = currentLocation.map();
         allowableActions.clear();
         List<Action> actions = new ArrayList<>();
+        List<Location> locationList = new ArrayList<>();
         for (int y = currentLocation.y() - 3; y <= currentLocation.y() + 3; y++) {
             for (int x = currentLocation.x() - 3; x <= currentLocation.x() + 3; x++) {
-                GameMap map = currentLocation.map();
+
                 Location temp = new Location(map, x, y);
 
                 if (temp.getActor() != null && temp.getActor() != actor) {
-                    actions.add(new AttackAction(temp.getActor(), "in a range of 3 blocks"));
+                    locationList.add(temp);
+                    actions.add(new RangeAttack(temp.getActor(), "in a range of 3 blocks"));
+
 
                 }
             }
         }
         allowableActions.add(actions);
 
+    }
+
+
+    /**
+     * Returns the chance to hit the target in integer. Use it altogether with nextInt() method.
+     *
+     * @return Integer, such as
+     */
+    @Override
+    public int chanceToHit() {
+
+
+        return super.chanceToHit();
     }
 
     /**
@@ -89,5 +109,7 @@ public class DarkmoonLongbow extends Bow {
     private int distance(Location a, Location b) {
         return Math.abs(a.x() - b.x()) + Math.abs(a.y() - b.y());
     }
+
+
 }
 
