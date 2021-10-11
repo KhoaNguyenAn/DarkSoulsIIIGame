@@ -55,7 +55,7 @@ public class Application {
 			Location bonfire = gameMap.at(38,11);
 
 			Actor player = new Player("Unkindled (Player)", '@', 100000, bonfire);	//TODO: Need to fixed after test
-		world.addPlayer(player, gameMap.at(41, 14));
+		world.addPlayer(player, gameMap.at(39, 12));
 
 			// Place bosses/weapon in the map
 		

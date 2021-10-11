@@ -56,7 +56,7 @@ public class DarkmoonLongbow extends Bow {
      */
     @Override
     public void tick(Location currentLocation, Actor actor) {
-    	actor.addCapability(RANGE_ATTACK);
+        actor.addCapability(RANGE_ATTACK);
         int X = currentLocation.x() - 3;
         int Y = currentLocation.y() - 3;
         GameMap map = currentLocation.map();

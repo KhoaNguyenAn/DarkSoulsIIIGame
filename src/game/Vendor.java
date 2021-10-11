@@ -56,6 +56,8 @@ public class Vendor extends Actor {
             actions.add(new BuyBroadswordAction());
             actions.add(new BuyGiantAxeAction());
             actions.add(new IncreaseMaxHpAction());
+            actions.add(new TradeGiantBossAction());
+            actions.add(new TradeDevourerBossAction());
 
 
         }
