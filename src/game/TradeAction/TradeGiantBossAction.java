@@ -35,7 +35,7 @@ public class TradeGiantBossAction extends BuyItemAction {
     public String execute(Actor actor, GameMap map) {
 
         for (Item item : actor.getInventory()) {
-            if (item.toString() == "Cinder of a Lord") {
+            if (item.toString() == "Yhorm the Giant's Cinder of a Lord") {
                 actor.getInventory().remove(item);
                 YhormsGiantMachete yhormsGiantMachete = new YhormsGiantMachete();
                 SwapWeaponAction swapWeaponAction = new SwapWeaponAction(yhormsGiantMachete);

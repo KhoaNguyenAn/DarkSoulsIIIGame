@@ -35,7 +35,7 @@ public class TradeDevourerBossAction extends BuyItemAction {
     public String execute(Actor actor, GameMap map) {
 
         for (Item item : actor.getInventory()) {
-            if (item.toString() == "Devourer Cinder of a Lord") {
+            if (item.toString() == "Devourer's Cinder of a Lord") {
                 actor.getInventory().remove(item);
                 DarkmoonLongbow darkmoonLongbow = new DarkmoonLongbow();
                 SwapWeaponAction swapWeaponAction = new SwapWeaponAction(darkmoonLongbow);
