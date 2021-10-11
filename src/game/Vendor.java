@@ -1,6 +1,8 @@
 package game;
-
+import game.TradeAction.*;
 import edu.monash.fit2099.engine.*;
+import game.TradeAction.BuyBroadswordAction;
+import game.TradeAction.BuyGiantAxeAction;
 import game.TradeAction.IncreaseMaxHpAction;
 import game.enums.Abilities;
 public class Vendor extends Actor {
@@ -51,9 +53,11 @@ public class Vendor extends Actor {
 
 
             // Add actions for buying items when close to it
-            actions.add(new game.BuyBroadswordAction());
-            actions.add(new game.BuyGiantAxeAction());
+            actions.add(new BuyBroadswordAction());
+            actions.add(new BuyGiantAxeAction());
             actions.add(new IncreaseMaxHpAction());
+            actions.add(new TradeGiantBossAction());
+            actions.add(new TradeDevourerBossAction());
 
 
         }

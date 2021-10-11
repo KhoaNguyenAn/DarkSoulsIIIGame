@@ -1,7 +1,7 @@
 package game;
 
 import edu.monash.fit2099.engine.*;
-import game.Weapon.BroadSword;
+import game.Weapon.DarkmoonLongbow;
 import game.enums.Abilities;
 import game.enums.Status;
 import game.interfaces.Resettable;
@@ -56,9 +56,9 @@ public class Player extends Actor implements Soul, Resettable {
 		this.addCapability(Abilities.BUY_ITEMS); // Ability to buy items from Vendor
 		this.addCapability(Abilities.ENTER);	// Ability to enter the floor
 		this.addCapability(Abilities.PLAYER); // Player will not be removed from map after dead.
-		this.addItemToInventory(new BroadSword());	  //
+		this.addItemToInventory(new DarkmoonLongbow());      //
 		this.addItemToInventory(new EstusFlask(this.maxHitPoints));
-		this.souls = new SoulsManager();	// Use SoulsManager to handle/store souls
+		this.souls = new SoulsManager(10000);    // Use SoulsManager to handle/store souls
 		this.bonfireLocation = bonfire;
 		registerInstance();		// Register to reset list
 

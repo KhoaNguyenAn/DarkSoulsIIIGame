@@ -3,7 +3,6 @@ package game.TradeAction;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Item;
-import game.BuyItemAction;
 import game.SwapWeaponAction;
 import game.Weapon.DarkmoonLongbow;
 
@@ -20,7 +19,7 @@ public class TradeDevourerBossAction extends BuyItemAction {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor +"trades Lord of Cinder from Yhorms the Giant and gets its weapon" ;
+        return actor + "trades Lord of Cinder from  Aldrich the Devourer and gets its weapon";
     }
 
     /**
@@ -35,12 +34,13 @@ public class TradeDevourerBossAction extends BuyItemAction {
     public String execute(Actor actor, GameMap map) {
 
         for (Item item : actor.getInventory()) {
-            if (item.toString() == "Devourer Cinder of a Lord") {
-                actor.getInventory().remove(item);
+            String a = item.toString();
+            if (item.toString().equals("Aldrich the Devourer's Cinders of a Lord")) {
+                actor.removeItemFromInventory(item);
                 DarkmoonLongbow darkmoonLongbow = new DarkmoonLongbow();
                 SwapWeaponAction swapWeaponAction = new SwapWeaponAction(darkmoonLongbow);
                 swapWeaponAction.execute(actor, map);
-                return "Traded Yhorm the Giant Lord of Cinder";
+                return "Traded Aldrich the Devourer Lord of Cinder";
             }
 
         }

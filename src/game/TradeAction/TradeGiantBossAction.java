@@ -1,9 +1,7 @@
 package game.TradeAction;
-
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Item;
-import game.BuyItemAction;
 import game.SwapWeaponAction;
 import game.Weapon.YhormsGiantMachete;
 
@@ -35,8 +33,8 @@ public class TradeGiantBossAction extends BuyItemAction {
     public String execute(Actor actor, GameMap map) {
 
         for (Item item : actor.getInventory()) {
-            if (item.toString() == "Cinder of a Lord") {
-                actor.getInventory().remove(item);
+            if (item.toString().equals("Yhorm the Giant's Cinder of a Lord")) {
+                actor.removeItemFromInventory(item);
                 YhormsGiantMachete yhormsGiantMachete = new YhormsGiantMachete();
                 SwapWeaponAction swapWeaponAction = new SwapWeaponAction(yhormsGiantMachete);
                 swapWeaponAction.execute(actor, map);

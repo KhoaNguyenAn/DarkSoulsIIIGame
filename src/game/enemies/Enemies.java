@@ -60,7 +60,8 @@ public abstract class Enemies extends Actor implements Resettable, Soul{
 		if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
 			
 			// Allow player to attack this enemy
-			actions.add(new AttackAction(this,direction));
+			if(!otherActor.hasCapability(Abilities.RANGE_ATTACK))
+				actions.add(new AttackAction(this,direction));
 
 			
 			// Add follow and attack behaviour to enemies
