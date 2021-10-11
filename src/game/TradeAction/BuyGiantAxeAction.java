@@ -1,7 +1,9 @@
-package game;
+package game.TradeAction;
+
 
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
+import game.SwapWeaponAction;
 import game.Weapon.GiantAxe;
 
 public class BuyGiantAxeAction extends BuyItemAction{

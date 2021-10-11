@@ -30,7 +30,6 @@ public class DarkmoonLongbow extends Bow {
     }
     public DarkmoonLongbow(){
         super("DarkmoonLongbow", ')', 70, "shoot", 80, "critical Strike");
-        addCapability(RANGE_ATTACK);
     }
 
     /**
@@ -54,6 +53,7 @@ public class DarkmoonLongbow extends Bow {
      */
     @Override
     public void tick(Location currentLocation, Actor actor) {
+    	actor.addCapability(RANGE_ATTACK);
         int X = currentLocation.x() - 3;
         int Y = currentLocation.y() - 3;
         allowableActions.clear();
