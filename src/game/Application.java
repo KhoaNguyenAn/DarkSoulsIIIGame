@@ -2,9 +2,7 @@ package game;
 
 import edu.monash.fit2099.engine.*;
 import game.Weapon.StormRuler;
-import game.enemies.AldrichTheDevourer;
 import game.enemies.Skeleton;
-import game.enemies.YhormTheGiant;
 import game.terrains.*;
 
 import java.util.Arrays;
@@ -55,21 +53,8 @@ public class Application {
 				"..++++++..+++...........................++++......+++.................+++.......",
 				"........+++++..............................+++++++.................+++++........",
 				"...........+++.......................................................+++++......",
-				"....................?...................................................++......",
-				"...............................................?................c........+++....",
-				"............................+.............................................+++...",
-				".............................+++.......++++.....................................",
-				"...............c.............++.......+......................++++...............",
-				".............................................................+++++++............",
-				"....................?.............###___###...................+++...............",
-				"..................................#_______#......................+++............",
-				"....c......++.....................#___B___#.............?.........+.............",
-				".........+++......................#_______#........................++...........",
-				"............+++...................####_####..........................+..........",
-				"..............+.............................?........................++.........",
 				"..............++.................................................++++++.........",
 				"............+++.....?.............................................++++..........",
-				"+..................................................................++...........",
 				"++...+++..................c.................?....................++++...........",
 				"+++......................................+++........................+.++........",
 				"++++.......++++.........................++.........................+....++......",
@@ -80,21 +65,24 @@ public class Application {
 				"___.......___#.++++++++++++++.+++.............................................++");
 		GameMap firstGameMap = new GameMap(groundFactory, ProfaneCapital);
 		GameMap secondGameMap = new GameMap(groundFactory, AnorLondo);
-		Location firstBonfire =  firstGameMap.at(38, 11);
-		Location secondBonfire = secondGameMap.at(38, 0);
+
+		// two object for Bonfire, pass the name
+		// Location firstBonfire =  firstGameMap.at(38, 11);
+		// Location secondBonfire = secondGameMap.at(38, 0);
+		//Bonfire bonfire = new Bonfire("Anor Londo’s Bonfire");
 		
 		world.addGameMap(firstGameMap);
 		world.addGameMap(secondGameMap);
 		// place this fog door at the most southern part of the first game map at any horizontal axis
-		firstGameMap.at(0, 11).setGround(new FogDoor("Fogdoor"));
-		firstGameMap.at(0,0).setGround(new firstBonfire());
-		secondGameMap.at(0,0).setGround(new secondBonfire());
+		Location fogDoor = firstGameMap.at(38,25);
+		firstGameMap.at(0, 11).setGround(new FogDoor(fogDoor,"AnorLondo",secondGameMap));
+		// firstGameMap.at(0,0).setGround(new firstBonfire());
+		// secondGameMap.at(0,0).setGround(new secondBonfire());
 		
 
 
-
+		Location bonfire = firstGameMap.at(38,11);
 		// Bonfire Manager class
-		// two object for Bonfire, pass the name
 		// activate Bonfire by Bonfire Manager
 		// render Bonfire -> set Ground method
 		Actor player = new Player("Unkindled (Player)", '@', 100000, bonfire); // TODO: Need to fixed after test
@@ -102,8 +90,8 @@ public class Application {
 
 		// Place bosses/weapon in the map
 
-		firstGameMap.at(6, 25).addActor(new YhormTheGiant());
-		firstGameMap.at(38, 9).addActor(new AldrichTheDevourer()); // TODO: Need to placed on the second map with certain
+		// firstGameMap.at(6, 25).addActor(new YhormTheGiant());
+		// firstGameMap.at(38, 9).addActor(new AldrichTheDevourer()); // TODO: Need to placed on the second map with certain
 																// terrains around
 		firstGameMap.at(7, 25).addItem(new StormRuler());
 		// FIXED: the Undead will be generated from the Cemetery
@@ -122,7 +110,7 @@ public class Application {
 
 		// second map
 		// Place a new Bonfire somewhere on the second map Anor Londo’s Bonfire
-		secondGameMap.at(x, y).add
+		//secondGameMap.at(x, y).add(38,0);
 
 		world.run();
 	}

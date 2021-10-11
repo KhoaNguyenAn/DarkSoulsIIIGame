@@ -25,11 +25,7 @@ public class FogDoor extends Ground {
 	}
 
     @Override
-    public Actions allowableActions(Actor actor, Location location, String direction) {
-        // appear at the most northern part of the second map with a similar horizontal point/position
-        // Enemies cannot interact or pass through with this fog door.
-        Actions actions = super.allowableActions(actor, location, map);
-        actions.add(new MoveActorAction(this.secondGameMap.at(this.targetLocation.x(),this.targetLocation.y()), "Welcome to "+ this.locationName));
-		return actions;
-    }
+	public Actions allowableActions(Actor actor, Location location, String direction){
+		return new Actions(new MoveActorAction(this.secondGameMap.at(this.targetLocation.x(),this.targetLocation.y()), "Welcome to "+ this.locationName));
+	}
 }
