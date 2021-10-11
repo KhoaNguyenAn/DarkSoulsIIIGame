@@ -1,11 +1,12 @@
 package game.TradeAction;
 
+
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 import game.SwapWeaponAction;
 import game.Weapon.BroadSword;
 
-public class BuyBroadswordAction extends game.BuyItemAction {
+public class BuyBroadswordAction extends BuyItemAction {
     public BuyBroadswordAction() {
 
     }

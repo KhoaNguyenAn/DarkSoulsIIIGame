@@ -1,5 +1,5 @@
 package game;
-
+import game.TradeAction.*;
 import edu.monash.fit2099.engine.*;
 import game.TradeAction.BuyBroadswordAction;
 import game.TradeAction.BuyGiantAxeAction;
