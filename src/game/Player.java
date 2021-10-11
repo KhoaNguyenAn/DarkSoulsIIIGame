@@ -16,7 +16,6 @@ public class Player extends Actor implements Soul, Resettable {
 	 */
 	private SoulsManager souls;
 	private Location bonfireLocation;
-
 	private final Menu menu = new Menu();
 //	private EstusFlask estusFlask;
 //	private BroadSword broadSword;
@@ -215,4 +214,10 @@ public class Player extends Actor implements Soul, Resettable {
 	public Location getBonfireLocation() {
 		return this.bonfireLocation;
 	}
+
+
+	public void setBonfireLocation(Location location) {
+		this.bonfireLocation = location;
+	}
+	
 }

@@ -59,33 +59,35 @@ public class Application {
 				"+++......................................+++........................+.++........",
 				"++++.......++++.........................++.........................+....++......",
 				"#####___#####++++......................+...............c...............+..+.....",
-				"_..._....._._#.++......................+...................................+....",
+				"_..._....._._#.++.........c............+...................................+....",
 				"...+.__..+...#+++..................................?........................+...",
-				"...+.....+._.#.+.....+++++...++..............................................++.",
-				"___.......___#.++++++++++++++.+++.............................................++");
+				"...+.....+._.#.+.....+++++...++....................................c.........++.",
+				"___.......___#.++++++++++++++.+++....................c........................++");
 		GameMap firstGameMap = new GameMap(groundFactory, ProfaneCapital);
 		GameMap secondGameMap = new GameMap(groundFactory, AnorLondo);
 
 		// two object for Bonfire, pass the name
-		// Location firstBonfire =  firstGameMap.at(38, 11);
-		// Location secondBonfire = secondGameMap.at(38, 0);
-		//Bonfire bonfire = new Bonfire("Anor Londo’s Bonfire");
+		Location firstBonfireLocation = firstGameMap.at(38,11);
+		Bonfire firstBonfire = new Bonfire("Firelink Shrine's Bonfire",true,firstGameMap,secondGameMap);
+		Bonfire secondBonfire = new Bonfire("Profane Capital's Bonfire",false,firstGameMap,secondGameMap);
+		firstGameMap.at(38,11).setGround(firstBonfire);
+		secondGameMap.at(40,0).setGround(secondBonfire);
 		
 		world.addGameMap(firstGameMap);
 		world.addGameMap(secondGameMap);
 		// place this fog door at the most southern part of the first game map at any horizontal axis
-		Location fogDoor = firstGameMap.at(38,25);
-		firstGameMap.at(0, 11).setGround(new FogDoor(fogDoor,"AnorLondo",secondGameMap));
-		// firstGameMap.at(0,0).setGround(new firstBonfire());
-		// secondGameMap.at(0,0).setGround(new secondBonfire());
+		Location fogDoorAtFirstMap = firstGameMap.at(38,25);
+		Location fogDoorAtSecondMap = secondGameMap.at(38,0);
+		firstGameMap.at(fogDoorAtFirstMap.x(),fogDoorAtFirstMap.y()).setGround(new FogDoor(fogDoorAtSecondMap,"AnorLondo",secondGameMap));
+		
+
 		
 
 
-		Location bonfire = firstGameMap.at(38,11);
 		// Bonfire Manager class
 		// activate Bonfire by Bonfire Manager
 		// render Bonfire -> set Ground method
-		Actor player = new Player("Unkindled (Player)", '@', 100000, bonfire); // TODO: Need to fixed after test
+		Actor player = new Player("Unkindled (Player)", '@', 100000, firstBonfireLocation); // TODO: Need to fixed after test
 		world.addPlayer(player, firstGameMap.at(38, 12));
 
 		// Place bosses/weapon in the map
@@ -111,7 +113,19 @@ public class Application {
 		// second map
 		// Place a new Bonfire somewhere on the second map Anor Londo’s Bonfire
 		//secondGameMap.at(x, y).add(38,0);
+		secondGameMap.at(0, 0).addActor(new Skeleton());
+		secondGameMap.at(2, 9).addActor(new Skeleton());
+		secondGameMap.at(10, 10).addActor(new Skeleton());
+		secondGameMap.at(20, 8).addActor(new Skeleton());
+		secondGameMap.at(52, 8).addActor(new Skeleton());
+		secondGameMap.at(30, 2).addActor(new Skeleton());
+		secondGameMap.at(33, 7).addActor(new Skeleton());
+		secondGameMap.at(31, 5).addActor(new Skeleton());
 
+		// add more skeleton
+		secondGameMap.at(30, 4).addActor(new Skeleton());
+		secondGameMap.at(33, 6).addActor(new Skeleton());
+		
 		world.run();
 	}
 }
