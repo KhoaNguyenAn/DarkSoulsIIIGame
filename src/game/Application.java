@@ -37,8 +37,8 @@ public class Application {
 					"....c......++.....................#___B___#.............?.........+.............",
 					".........+++......................#_______#........................++...........",
 					"............+++...................####_####..........................+..........",
-					"..............+.............................?........................++.........",
-					"..............++.................................................++++++.........",
+					"..............+...........................#.?........................++.........",
+					"..............++..........................#......................++++++.........",
 					"............+++.....?.............................................++++..........",
 					"+..................................................................++...........",
 					"++...+++..................c.................?....................++++...........",
@@ -55,7 +55,7 @@ public class Application {
 			Location bonfire = gameMap.at(38,11);
 
 			Actor player = new Player("Unkindled (Player)", '@', 100000, bonfire);	//TODO: Need to fixed after test
-			world.addPlayer(player, gameMap.at(30, 6));
+		world.addPlayer(player, gameMap.at(41, 14));
 
 			// Place bosses/weapon in the map
 		
@@ -66,8 +66,8 @@ public class Application {
 			
 			// Place several Skeletons in the map
 			gameMap.at(0, 0).addActor(new Skeleton());
-			gameMap.at(2, 15).addActor(new Skeleton());
-		gameMap.at(10, 10).addActor(new Skeleton());
+		gameMap.at(2, 15).addActor(new Skeleton());
+		gameMap.at(43, 14).addActor(new Skeleton());
 		gameMap.at(10, 12).addActor(new Skeleton());
 		gameMap.at(52, 23).addActor(new Skeleton());
 			gameMap.at(30, 4).addActor(new Skeleton());
