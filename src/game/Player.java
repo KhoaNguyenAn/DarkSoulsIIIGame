@@ -55,7 +55,7 @@ public class Player extends Actor implements Soul, Resettable {
 		this.addCapability(Abilities.BUY_ITEMS); // Ability to buy items from Vendor
 		this.addCapability(Abilities.ENTER);	// Ability to enter the floor
 		this.addCapability(Abilities.PLAYER); // Player will not be removed from map after dead.
-		this.addItemToInventory(new DarkmoonLongbow());      //
+		this.addItemToInventory(new DarkmoonLongbow());      // TODO: Need to be fixed after test
 		this.addItemToInventory(new EstusFlask(this.maxHitPoints));
 		this.souls = new SoulsManager(10000);    // Use SoulsManager to handle/store souls
 		this.bonfireLocation = bonfire;

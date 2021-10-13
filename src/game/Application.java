@@ -2,7 +2,9 @@ package game;
 
 import edu.monash.fit2099.engine.*;
 import game.Weapon.StormRuler;
+import game.enemies.AldrichTheDevourer;
 import game.enemies.Skeleton;
+import game.enemies.YhormTheGiant;
 import game.terrains.*;
 
 import java.util.Arrays;
@@ -50,19 +52,19 @@ public class Application {
 				"___.......___#.++++++++++++++.+++.............................................++");
 
 		List<String> AnorLondo = Arrays.asList(
-				"..++++++..+++...........................++++......+++.................+++.......",
-				"........+++++..............................+++++++.................+++++........",
-				"...........+++.......................................................+++++......",
-				"..............++.................................................++++++.........",
+				"..++++++..+++..............#..................#.......................+++.......",
+				"........+++++..............#__________________#....................+++++........",
+				"........c..+++.......................................................+++++......",
+				"......c.......++.................................................++++++.........",
 				"............+++.....?.............................................++++..........",
 				"++...+++..................c.................?....................++++...........",
 				"+++......................................+++........................+.++........",
 				"++++.......++++.........................++.........................+....++......",
-				"#####___#####++++......................+...............c...............+..+.....",
-				"_..._....._._#.++.........c............+...................................+....",
-				"...+.__..+...#+++..................................?........................+...",
-				"...+.....+._.#.+.....+++++...++....................................c.........++.",
-				"___.......___#.++++++++++++++.+++....................c........................++");
+				".............##________________##....................+...............c..........",
+				"....c........#_..._....._._.....#.......c............+..........................",
+				".....c.......#...+.__..+........#................................?..............",
+				".............#...+.....+._......#..........++...................................",
+				".............#___........#_.....#...........+++....................c............");
 		GameMap firstGameMap = new GameMap(groundFactory, ProfaneCapital);
 		GameMap secondGameMap = new GameMap(groundFactory, AnorLondo);
 
@@ -81,20 +83,17 @@ public class Application {
 		firstGameMap.at(fogDoorAtFirstMap.x(),fogDoorAtFirstMap.y()).setGround(new FogDoor(fogDoorAtSecondMap,"AnorLondo",secondGameMap));
 		
 
-		
-
-
 		// Bonfire Manager class
 		// activate Bonfire by Bonfire Manager
 		// render Bonfire -> set Ground method
-		Actor player = new Player("Unkindled (Player)", '@', 100000, firstBonfireLocation); // TODO: Need to fixed after test
+		Actor player = new Player("Unkindled (Player)", '@', 100000, firstBonfireLocation); // TODO: Need to be fixed after test
 		world.addPlayer(player, firstGameMap.at(38, 12));
 
 		// Place bosses/weapon in the map
 
-		// firstGameMap.at(6, 25).addActor(new YhormTheGiant());
-		// firstGameMap.at(38, 9).addActor(new AldrichTheDevourer()); // TODO: Need to placed on the second map with certain
-																// terrains around
+		firstGameMap.at(6, 25).addActor(new YhormTheGiant());
+		secondGameMap.at(20, 12).addActor(new AldrichTheDevourer());
+		 
 		firstGameMap.at(7, 25).addItem(new StormRuler());
 		// FIXED: the Undead will be generated from the Cemetery
 
@@ -116,7 +115,7 @@ public class Application {
 		secondGameMap.at(0, 0).addActor(new Skeleton());
 		secondGameMap.at(2, 9).addActor(new Skeleton());
 		secondGameMap.at(10, 10).addActor(new Skeleton());
-		secondGameMap.at(20, 8).addActor(new Skeleton());
+		secondGameMap.at(20, 5).addActor(new Skeleton());
 		secondGameMap.at(52, 8).addActor(new Skeleton());
 		secondGameMap.at(30, 2).addActor(new Skeleton());
 		secondGameMap.at(33, 7).addActor(new Skeleton());

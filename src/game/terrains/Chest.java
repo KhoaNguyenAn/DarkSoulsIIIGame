@@ -30,6 +30,7 @@ public class Chest extends Ground{
 	 */
 	@Override
 	public void tick(Location location) {
+		// If the chest has OPENED status, set it to dirt and triggered the feature(either spawn mimic or place souls)
 		if(this.hasCapability(Status.OPENED)){
 			location.setGround(new Dirt());
 			if(random.nextInt(100)<50) {
