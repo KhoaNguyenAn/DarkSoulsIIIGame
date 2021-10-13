@@ -95,7 +95,7 @@ public class RangeAttack extends Action {
                     }
                 }
             } else {
-                result += "The Wall BLocked the attack from" + actor + "to" + target;
+                result += "The Wall BLocked the attack from " + actor + " to " + target;
             }
 //        }
         return result;
