@@ -38,6 +38,16 @@ public class Skeleton extends Enemies implements Resettable{
 		randomWeapon();		// Skeleton will hold random weapon
 	}
 	/**
+	 * Constructor of skeleton
+	 * Allowed setting name to distinguish the actor
+	 */
+	public Skeleton(String name) {
+		super(name, 's', 100, 250);
+		this.addCapability(Abilities.REVIVE);	// Skeleton has ability to revive
+		behaviours.add(new WanderBehaviour());	// Add wander bahaviours
+		randomWeapon();		// Skeleton will hold random weapon
+	}
+	/**
 	 * Override playTurn method
 	 * @sees edu.monash.fit2099.engine.Actor#playTurn(Actions, Action, GameMap, Display)
 	 */
