@@ -6,8 +6,8 @@ import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Ground;
 import edu.monash.fit2099.engine.Location;
-import game.OpenAction;
 import game.TokenOfSoul;
+import game.actions.OpenAction;
 import game.enemies.Mimic;
 import game.enums.Status;
 /**

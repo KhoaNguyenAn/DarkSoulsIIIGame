@@ -2,8 +2,8 @@ package game.TradeAction;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Item;
-import game.SwapWeaponAction;
 import game.Weapon.YhormsGiantMachete;
+import game.actions.SwapWeaponAction;
 
 public class TradeGiantBossAction extends BuyItemAction {
     public TradeGiantBossAction() {

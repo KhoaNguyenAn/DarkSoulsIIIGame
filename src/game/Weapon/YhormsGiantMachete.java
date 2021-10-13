@@ -2,8 +2,8 @@ package game.Weapon;
 
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.WeaponAction;
-import game.EmberFormAction;
 import game.enums.Status;
+import game.skills.EmberFormAction;
 
 public class YhormsGiantMachete extends Axe {
     private Actor actor;

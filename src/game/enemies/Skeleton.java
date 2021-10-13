@@ -1,9 +1,9 @@
 package game.enemies;
 
 import edu.monash.fit2099.engine.*;
-import game.KilledAction;
 import game.Weapon.BroadSword;
 import game.Weapon.GiantAxe;
+import game.actions.KilledAction;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.ReviveBehaviour;
 import game.behaviours.WanderBehaviour;

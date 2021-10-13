@@ -1,6 +1,7 @@
 package game;
 
 import edu.monash.fit2099.engine.Item;
+import game.actions.Drink;
 import game.interfaces.Resettable;
 /**
  *  EstuskFlask - A health portion for Player

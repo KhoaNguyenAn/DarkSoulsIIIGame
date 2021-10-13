@@ -5,8 +5,8 @@ import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Location;
-import game.RangeAttack;
 import game.enums.*;
+import game.skills.RangeAttack;
 
 import java.util.ArrayList;
 import java.util.List;

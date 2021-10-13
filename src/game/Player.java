@@ -6,6 +6,8 @@ import game.enums.Abilities;
 import game.enums.Status;
 import game.interfaces.Resettable;
 import game.interfaces.Soul;
+import game.managers.ResetManager;
+import game.managers.SoulsManager;
 
 /**
  * Class representing the Player.

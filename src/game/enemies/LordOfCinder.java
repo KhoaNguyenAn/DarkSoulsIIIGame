@@ -1,10 +1,10 @@
 package game.enemies;
 
 import edu.monash.fit2099.engine.*;
-import game.AttackAction;
-import game.KilledAction;
 import game.PortableItem;
-import game.StunAction;
+import game.actions.AttackAction;
+import game.actions.KilledAction;
+import game.actions.StunAction;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.UniqueBehaviour;

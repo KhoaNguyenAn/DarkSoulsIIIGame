@@ -1,7 +1,8 @@
-package game;
+package game.actions;
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
+import game.EstusFlask;
 
 public class Drink extends Action {
     private EstusFlask estusFlask;
