@@ -4,8 +4,8 @@ import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Location;
-import game.RangeAttack;
 import game.interfaces.Behaviour;
+import game.skills.RangeAttack;
 /**
  * Class representing range attack behaviour (it is for Aldrich only currently)
  * @author fzl84

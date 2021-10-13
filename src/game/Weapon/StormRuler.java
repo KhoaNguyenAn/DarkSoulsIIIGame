@@ -2,10 +2,10 @@ package game.Weapon;
 
 
 import edu.monash.fit2099.engine.*;
-import game.ChargeAction;
-import game.SwapWeaponAction;
-import game.WindSlashAction;
+import game.actions.SwapWeaponAction;
 import game.enums.Abilities;
+import game.skills.ChargeAction;
+import game.skills.WindSlashAction;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -3,8 +3,8 @@ package game.TradeAction;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Item;
-import game.SwapWeaponAction;
 import game.Weapon.DarkmoonLongbow;
+import game.actions.SwapWeaponAction;
 
 public class TradeDevourerBossAction extends BuyItemAction {
     public TradeDevourerBossAction() {

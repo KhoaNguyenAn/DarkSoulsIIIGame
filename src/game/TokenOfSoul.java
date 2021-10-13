@@ -2,9 +2,11 @@ package game;
 
 import edu.monash.fit2099.engine.Item;
 import edu.monash.fit2099.engine.Location;
+import game.actions.PickUpSoulAction;
 import game.enums.Status;
 import game.interfaces.Resettable;
 import game.interfaces.Soul;
+import game.managers.SoulsManager;
 /**
  * Class representing the token of soul.
  * @author Dongzheng Wu

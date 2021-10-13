@@ -5,7 +5,8 @@ import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Location;
-import game.RangeAttack;
+import game.enums.*;
+import game.skills.RangeAttack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,10 +69,9 @@ public class DarkmoonLongbow extends Bow {
 
                 Location temp = new Location(map, x, y);
 
-                if (temp.getActor() != null && temp.getActor() != actor) {
+                if (temp.getActor() != null && temp.getActor() != actor && !temp.getActor().hasCapability(Status.VENDOR)) {
                     locationList.add(temp);
                     actions.add(new RangeAttack(temp.getActor(), "in a range of 3 blocks"));
-
 
                 }
             }

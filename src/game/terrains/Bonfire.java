@@ -1,11 +1,12 @@
-package game;
+package game.terrains;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Ground;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Location;
 import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.MoveActorAction;
-import game.Rest;
+import game.actions.Rest;
+import game.actions.lightTheBonfire;
 /**
  *  Public Bonfire Class - Extends from Ground
  */

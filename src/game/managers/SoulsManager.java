@@ -1,4 +1,4 @@
-package game;
+package game.managers;
 /**
  * Class representing the souls manager.
  * @author Dongzheng Wu

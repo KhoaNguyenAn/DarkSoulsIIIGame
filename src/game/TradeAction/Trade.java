@@ -1,8 +1,10 @@
-package game;
+package game.TradeAction;
 
 import edu.monash.fit2099.engine.GameMap;
+import game.Player;
 import game.Weapon.BroadSword;
 import game.Weapon.GiantAxe;
+import game.actions.SwapWeaponAction;
 import game.interfaces.Purchasable;
 import game.interfaces.Soul;
 

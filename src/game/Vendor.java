@@ -5,6 +5,7 @@ import game.TradeAction.BuyBroadswordAction;
 import game.TradeAction.BuyGiantAxeAction;
 import game.TradeAction.IncreaseMaxHpAction;
 import game.enums.Abilities;
+import game.enums.Status;
 public class Vendor extends Actor {
 
 
@@ -17,10 +18,12 @@ public class Vendor extends Actor {
      */
     public Vendor(String name, char displayChar, int hitPoints) {
         super("Vendor", 'F', 0);
+        this.addCapability(Status.VENDOR);
     }
 
     public Vendor() {
         super("Vendor",'F',0);
+    	this.addCapability(Status.VENDOR);
     }
 
     /**

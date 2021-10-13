@@ -1,4 +1,4 @@
-package game;
+package game.skills;
 
 import edu.monash.fit2099.engine.*;
 import game.enums.Abilities;
@@ -95,7 +95,7 @@ public class RangeAttack extends Action {
                     }
                 }
             } else {
-                result += "The Wall BLocked the attack from" + actor + "to" + target;
+                result += "The Wall BLocked the attack from " + actor + " to " + target;
             }
 //        }
         return result;

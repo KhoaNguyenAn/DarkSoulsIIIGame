@@ -11,7 +11,8 @@ public enum Status {
     ACTIVE,		// use this status to display active message for boss
     STUNNED,
     EMBER_FORM,
-    OPENED		// the status to illustrate if the chest is opened or not
+    OPENED,		// the status to illustrate if the chest is opened or not
+    VENDOR  // to indicate the actor is vendor
 }
 
 
