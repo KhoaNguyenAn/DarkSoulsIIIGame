@@ -53,7 +53,7 @@ public class RangeAttack extends Action {
 
             for (int x : xs) {
                 for (int y : ys) {
-                    if (map.at(x, y).getGround().getDisplayChar() == '#') {
+                    if (map.at(x, y).getGround().blocksThrownObjects()) {
                         wall_detected = true;
 
                     }
