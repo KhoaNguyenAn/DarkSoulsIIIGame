@@ -6,6 +6,7 @@ import game.enums.Abilities;
 import game.enums.Status;
 import game.interfaces.Resettable;
 import game.interfaces.Soul;
+import game.managers.BonfireManager;
 import game.managers.ResetManager;
 import game.managers.SoulsManager;
 
@@ -61,12 +62,17 @@ public class Player extends Actor implements Soul, Resettable {
 		this.addItemToInventory(new EstusFlask(this.maxHitPoints));
 		this.souls = new SoulsManager(10000);    // Use SoulsManager to handle/store souls
 		this.bonfireLocation = bonfire;
+		
 		registerInstance();		// Register to reset list
 
 	}
 
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
+		// Add the initial bonfire to the bonfire manager
+		BonfireManager bonfireManager = BonfireManager.getInstance();
+		if(bonfireManager.isEmpty())
+			bonfireManager.appendBonfireInstance(map, bonfireLocation);
 		message();		// Display the current status of player
 		// Check if player is conscious or not.
 		if (!this.isConscious()) {
@@ -101,7 +107,8 @@ public class Player extends Actor implements Soul, Resettable {
 				// Heal the player twice because the player may hurt before falling valley, in this case
 				// one heal cannot get to the maximum.
 				this.heal(maxHitPoints);
-				map.moveActor(this, map.at(this.bonfireLocation.x(), this.bonfireLocation.y()));
+				// Reposition the player to the latest bonfire
+				map.moveActor(this, bonfireManager.getMap().at(bonfireManager.getLocation().x(), bonfireManager.getLocation().y()));
 				this.removeCapability(Status.SOFTRESET);
 			}
 			return new DoNothingAction();
@@ -122,11 +129,6 @@ public class Player extends Actor implements Soul, Resettable {
 		soulObject.addSouls(souls.getSouls());
 		souls.clear();
 	}
-
-//	public void buyitems(){
-//		//reference to player
-//		//Player
-//	}
 
 	/**
 	 * Override the addSouls so that player can gain souls
@@ -213,13 +215,13 @@ public class Player extends Actor implements Soul, Resettable {
 		}
 	}
 
-	public Location getBonfireLocation() {
-		return this.bonfireLocation;
-	}
-
-
-	public void setBonfireLocation(Location location) {
-		this.bonfireLocation = location;
-	}
+//	public Location getBonfireLocation() {
+//		return this.bonfireLocation;
+//	}
+//
+//
+//	public void setBonfireLocation(Location location) {
+//		this.bonfireLocation = location;
+//	}
 	
 }

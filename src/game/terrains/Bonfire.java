@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.MoveActorAction;
 import game.actions.Rest;
 import game.actions.lightTheBonfire;
+import game.managers.BonfireManager;
 /**
  *  Public Bonfire Class - Extends from Ground
  */
@@ -16,6 +17,7 @@ public class Bonfire extends Ground {
 	private Boolean activateStatus;
 	private GameMap firstGameMap;
 	private GameMap secondGameMap;
+	private BonfireManager bonfiremanager;
  
     /**
 	 *  Letter "B" is the Bonfire
