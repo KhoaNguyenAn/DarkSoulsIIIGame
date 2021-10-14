@@ -2,6 +2,7 @@ package game.actions;
 
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.GameMap;
+import game.managers.BonfireManager;
 import game.managers.ResetManager;
 import edu.monash.fit2099.engine.Actor;
 
@@ -23,6 +24,8 @@ public class Rest extends Action {
 	 */
     @Override
 	public String execute(Actor actor, GameMap map) {
+    	BonfireManager bonfireManager = BonfireManager.getInstance();
+    	bonfireManager.appendBonfireInstance(map, map.locationOf(actor));
 		actor.heal(Integer.MAX_VALUE/2);
         ResetManager manager = ResetManager.getInstance();
 		manager.run();
