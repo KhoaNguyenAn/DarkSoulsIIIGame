@@ -38,9 +38,9 @@ public class RangeAttack extends Action {
         String result = new String();
         Boolean wall_detected = false;
         Weapon weapon = actor.getWeapon();
-//        if (!(rand.nextInt(100) <= weapon.chanceToHit())) {
-//            return actor + " misses " + target + ".";
-//        }
+        if (!(rand.nextInt(100) <= weapon.chanceToHit())) {
+            return actor + " misses " + target + ".";
+        }
         if (!map.contains(target) || !map.contains(actor))
             return null;
         Location here = map.locationOf(actor);
@@ -48,8 +48,8 @@ public class RangeAttack extends Action {
 
         NumberRange xs, ys;
 //        if (here.x() == there.x() || here.y() == there.y()) {
-            xs = new NumberRange(Math.min(here.x(), there.x()), Math.abs(here.x() - there.x()) + 1);
-            ys = new NumberRange(Math.min(here.y(), there.y()), Math.abs(here.y() - there.y()) + 1);
+        xs = new NumberRange(Math.min(here.x(), there.x()), Math.abs(here.x() - there.x()) + 1);
+        ys = new NumberRange(Math.min(here.y(), there.y()), Math.abs(here.y() - there.y()) + 1);
 
             for (int x : xs) {
                 for (int y : ys) {
